@@ -1,8 +1,7 @@
 class Question < ActiveRecord::Base
 
-  attr_accessible :answer_a, 
-                  :answer_b, 
-                  :answer_c, :batch_tag, 
+  attr_accessible :batch_tag, 
+                  :answer,
                   :category_id, 
                   :difficulty_id,
                   :extra_info, 
@@ -17,8 +16,13 @@ class Question < ActiveRecord::Base
                   :writer_id, 
                   :writer_reference_1, 
                   :writer_reference_2, 
-                  :answer,
                   :created_at,
                   :updated_at
+
+
+  validates_presence_of :question, 
+                        :answer
+
+  
 
 end

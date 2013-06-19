@@ -13,6 +13,7 @@ gem 'rabl'
 group :test, :development do
   gem 'rspec-rails'
   gem 'json_spec'
+  gem 'turnip'
 end
 
 
