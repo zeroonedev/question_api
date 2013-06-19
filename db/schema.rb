@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(:version => 20130613043442) do
 
   create_table "questions", :force => true do |t|
     t.string   "question"
+    t.string   "answer"
     t.string   "answer_a"
     t.string   "answer_b"
     t.string   "answer_c"

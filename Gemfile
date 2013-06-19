@@ -6,15 +6,14 @@ gem 'rack-cors', :require => 'rack/cors'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-
+gem 'rabl'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :test, :development do
   gem 'rspec-rails'
+  gem 'json_spec'
 end
-
-
 
 
 # To use ActiveModel has_secure_password
