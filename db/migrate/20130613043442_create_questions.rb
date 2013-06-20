@@ -21,7 +21,8 @@ class CreateQuestions < ActiveRecord::Migration
       t.integer :producer_id         
       t.integer :difficulty_id   
       t.boolean :verified   
-      t.boolean :used         
+      t.boolean :used
+      t.boolean :is_multi     
       t.timestamps
     end
   end
