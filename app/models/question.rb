@@ -27,7 +27,6 @@ class Question < ActiveRecord::Base
                         :category_id,
                         :difficulty_id,
                         :extra_info,
-                        :producer_id,
                         :writer_id,
                         :writer_reference_1,
                         :writer_reference_2
@@ -38,7 +37,7 @@ class Question < ActiveRecord::Base
   
   #TODO make this less crazy
   def sanitize_errors
-    errors.messages.map{|k, v| {k => v.first}  }.reduce({}){|memo, error| memo.merge!(error) }
+    errors.messages.map{|k, v| {k => v.join(" ")}  }.reduce({}){|memo, error| memo.merge!(error) }
   end
 
 end
