@@ -5,12 +5,16 @@ class QuestionsController < CorsController
   end
 
   def new
-    render :json => Question.new
+    @question = Question.new
   end
 
   def create
-    question = Question.create(params[:question])
-    render :json => question
+    @question = Question.create(params[:question])
+    if @question.valid?
+      render :show
+    else
+      render :new
+    end
   end
 
 end
