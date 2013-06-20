@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20130613043442) do
     t.integer  "difficulty_id"
     t.boolean  "verified"
     t.boolean  "used"
+    t.boolean  "is_multi"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
   end
