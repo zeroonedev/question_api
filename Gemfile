@@ -7,6 +7,8 @@ gem 'rack-cors', :require => 'rack/cors'
 
 gem 'sqlite3'
 gem 'rabl'
+gem 'conformist'
+gem 'tire'
 
 # Gems used only for assets and not required
 # in production environments by default.

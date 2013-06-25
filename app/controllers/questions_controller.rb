@@ -1,7 +1,9 @@
 class QuestionsController < CorsController
 
+  before_filter :get_question, only: [:show, :edit]
+
   def index
-    @questions = Question.all
+    @questions = Question.search(params)
   end
 
   def new
@@ -15,6 +17,18 @@ class QuestionsController < CorsController
     else
       render :new
     end
+  end
+
+  def edit
+  end
+
+  def show
+  end
+
+  private
+
+  def get_question
+    @question = Question.find(params[:id])
   end
 
 end

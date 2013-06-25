@@ -31,10 +31,26 @@ class Question < ActiveRecord::Base
                         :writer_reference_1,
                         :writer_reference_2
 
-  # validates_presence_of :answer_a, :answer_b, :answer_c :if => proc { |obj| obj.is_multi }}
+  # validates_presence_if :answer_a, :answer_b, :answer_c :if => proc { |obj| obj.is_multi }}
 
   validates_uniqueness_of :question
   
+  belongs_to :writer
+  belongs_to :producer
+  belongs_to :category
+  belongs_to :difficulty
+
+
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
+
+
+  def self.search(params)
+    tire.search(load: true) do
+      query { string params[:query]} if params[:query].present?
+    end
+  end
+
   #TODO make this less crazy
   def sanitize_errors
     errors.messages.map{|k, v| {k => v.join(" ")}  }.reduce({}){|memo, error| memo.merge!(error) }
