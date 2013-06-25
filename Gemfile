@@ -7,6 +7,7 @@ gem 'rack-cors', :require => 'rack/cors'
 
 gem 'sqlite3'
 gem 'rabl'
+gem 'prawn'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -14,6 +15,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'json_spec'
   gem 'turnip'
+  gem 'pdf-inspector', :require => "pdf/inspector"
 end
 
 
