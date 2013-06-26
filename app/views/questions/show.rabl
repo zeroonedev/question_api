@@ -20,3 +20,9 @@ attributes :question,
            :writer_id,
            :writer_reference_1,
            :writer_reference_2
+
+
+node(:category) do |question|
+  question.category.name if question.category
+end
+

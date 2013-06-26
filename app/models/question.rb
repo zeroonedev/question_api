@@ -44,10 +44,27 @@ class Question < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-
+  mapping do
+    indexes :id, type: 'integer'
+    indexes :question, boost: 10
+    indexes :answer, boost: 9
+    indexes :batch_tag
+    indexes :writer_id, type: 'integer'
+    indexes :category_id, type: 'integer'
+  end
+  
   def self.search(params)
-    tire.search(load: true) do
-      query { string params[:query]} if params[:query].present?
+    tire.search(load: true, default_opertor: "AND", match_all: {}) do |s|
+      s.size self.all.count
+      s.query { string params[:query] } if params[:query].present?
+      s.filter :term, writer_id: params[:writer_id] if params[:writer_id].present?
+      s.facet "writers" do
+        terms :writer_id
+      end
+      s.filter :term, category_id: params[:category_id] if params[:category_id].present?
+      s.facet "category" do
+        terms :category_id
+      end
     end
   end
 
