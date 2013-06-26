@@ -17,3 +17,9 @@ end
 task :stop_server do
   `kill -9 $(cat tmp/pids/server.pid)`
 end
+
+task :start_search_server do
+  `elasticsearch -f -D es.config=/usr/local/Cellar/elasticsearch/0.90.1/config/elasticsearch.yml`
+end
+
+
