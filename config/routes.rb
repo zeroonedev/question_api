@@ -1,7 +1,12 @@
 QuestionServer::Application.routes.draw do
+  devise_for :admins
+
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
   resources :questions
 
   match 'questions.json' => 'cors#options', constraints: { method: 'OPTIONS' }
+  match 'questions/:id.json' => 'cors#options', constraints: { method: 'OPTIONS' }
 
 
   # The priority is based upon order of creation:

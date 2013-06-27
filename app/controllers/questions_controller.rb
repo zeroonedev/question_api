@@ -1,6 +1,6 @@
 class QuestionsController < CorsController
 
-  before_filter :get_question, only: [:show, :edit]
+  before_filter :get_question, only: [:show, :edit, :update]
 
   def index
     @questions = Question.search(params)
@@ -20,6 +20,14 @@ class QuestionsController < CorsController
   end
 
   def edit
+  end
+
+  def update
+    if @question.update_attributes(params[:question])
+      render :show
+    else
+      render :edit
+    end
   end
 
   def show

@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'rabl'
 gem 'conformist'
 gem 'tire'
+gem 'rails_admin'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -33,3 +34,6 @@ end
 
 # To use debugger
 # gem 'debugger'
+
+
+gem "devise"
