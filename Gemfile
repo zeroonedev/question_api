@@ -17,6 +17,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'json_spec'
   gem 'turnip'
+  gem 'pry-rails'
 end
 
 

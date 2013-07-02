@@ -6,6 +6,10 @@ node(:errors) { |question|
 
 attributes :question,
            :answer,
+           :answer_a,
+           :answer_b,
+           :answer_c,
+           :correct_answer,
            :extra_info, 
            :writer_reference_1, 
            :writer_reference_2, 

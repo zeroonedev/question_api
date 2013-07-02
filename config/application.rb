@@ -77,7 +77,9 @@ module QuestionServer
 
       allow do
         origins '*'
-        resource '/public/*', :headers => :any, :methods => :get
+        resource '*', 
+        :headers => :any, 
+        :methods => [:get, :post, :options]
       end
     end
 

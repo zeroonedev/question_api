@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130627042155) do
+ActiveRecord::Schema.define(:version => 20130702035808) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(:version => 20130627042155) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "episodes", :force => true do |t|
+    t.string   "rx_number"
+    t.date     "record_date"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "producers", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -55,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20130627042155) do
     t.string   "answer_a"
     t.string   "answer_b"
     t.string   "answer_c"
+    t.string   "correct_answer"
     t.string   "extra_info"
     t.string   "writer_reference_1"
     t.string   "writer_reference_2"
@@ -62,7 +70,7 @@ ActiveRecord::Schema.define(:version => 20130627042155) do
     t.string   "tx_number"
     t.string   "verifier_reference_1"
     t.string   "verifier_reference_2"
-    t.string   "writer_id"
+    t.integer  "writer_id"
     t.integer  "category_id"
     t.integer  "producer_id"
     t.integer  "difficulty_id"
@@ -85,6 +93,41 @@ ActiveRecord::Schema.define(:version => 20130627042155) do
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
+
+  create_table "round_types", :force => true do |t|
+    t.string   "name"
+    t.string   "question_type"
+    t.integer  "number_of_questions"
+    t.integer  "number_of_spares"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  create_table "rounds", :force => true do |t|
+    t.string   "name"
+    t.integer  "type_id"
+    t.integer  "episode_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "writers", :force => true do |t|
     t.string   "name"

@@ -1,4 +1,7 @@
 QuestionServer::Application.routes.draw do
+  devise_for :users, :controllers => {sessions: 'sessions'}
+  match 'users/sign_in' => 'cors#options', constraints: { method: 'OPTIONS' }
+
   devise_for :admins
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'

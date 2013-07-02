@@ -1,5 +1,3 @@
-require 'otsruct'
-
 class SearchMetaController < ApplicationController
 
   def index

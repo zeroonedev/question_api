@@ -1,0 +1,19 @@
+question,answer_a,answer_b,answer_c,correct_answer,extra_info,writer_ref_1,writer_ref_2,verifier_ref_1,verifier_ref_2,writer,batch_tag,difficulty,category,verified,producer,used 
+A popular variety of apple is the ‘red’ what?,SCRUMPTIOUS,DELICIOUS,DELECTABLE,B,NA,NA,NA,NA,NA,Maureen Sherlock,MSK145,easy,Sport,no,Graeme,no
+Shakespeare’s ‘Hamlet’ is a prince of which country?,SCOTLAND,DENMARK,SWEDEN,B,NA,NA,NA,NA,NA,Maureen Sherlock,MSK128,medium,Music,no,Graeme,no
+What is the postcode for the Brisbane city area?,4000,5000,6000,A,NA,NA,NA,NA,NA,David Poltorak,DP13,hard,Pot Luck,no,Isabella,yes
+What is the tiger’s name in the movie ‘Life of Pi’?,PETER PARKER,ALAN PARKER,RICHARD PARKER,C,NA,NA,NA,NA,NA,David Poltorak,DP43,easy,Food,yes,Isabella,yes
+When you bump your ‘funny bone’ which nerve do you hit?,ULNAR,SCIATIC,OPTIC,A,NA,NA,NA,NA,NA,Maureen Sherlock,MSK154,medium,Sport,yes,Graeme,no
+"In geometry, which of these is an obtuse angle?",45°,90°,135°,C,NA,NA,NA,NA,NA,Maureen Sherlock,MSK184,medium,History,no,Graeme,no
+Which of these cricketers was first to captain the Australian Test team?,MARK TAYLOR,STEVE WAUGH,ALAN BORDER,C,NA,NA,NA,NA,NA,Maureen Sherlock,MSK190,easy,Current Affairs,yes,Isabella,yes
+Which of these amounts is the largest?,A SCORE,A GROSS,THREE DOZEN,B,NA,NA,NA,NA,NA,David Poltorak,DP36,easy,Music,yes,Isabella,no
+Who is second in the line of succession to the British throne?,ANDREW,HARRY,WILLIAM,C,NA,NA,NA,NA,NA,Maureen Sherlock,MSK143,easy,Movies,yes,Isabella,yes
+"The flag of which of these countries is red, white and blue?",RUSSIA,FINLAND,TURKEY,A,NA,NA,NA,NA,NA,David Poltorak,DP03,medium,TV,no,Graeme,no
+Which of these two-dimensional shapes has the most sides?,NONAGON,HEPTAGON,OCTAGON,A,NA,NA,NA,NA,NA,Maureen Sherlock,MSK112,hard,Current Affairs,yes,Isabella,yes
+ On a ‘Qwerty’ keyboard what letter is immediately right of the ‘Z’?,L,W,X,C,NA,NA,NA,NA,NA,Maureen Sherlock,MSK131,easy,Pot Luck,no,Graeme,no
+Which member of the Kelly gang was a brother of Ned?,DAN,STEVE,JOE,A,NA,NA,NA,NA,NA,David Poltorak,DP32,easy,Sport,no,Graeme,no
+What is the currency of the Republic of Ireland?,THE PUNT,THE POUND STERLING,THE EURO,C,NA,NA,NA,NA,NA,David Poltorak,DP04,medium,Geography,no,Isabella,yes
+In which film did Tom Hanks and Meg Ryan first star together?,YOU'VE GOT MAIL,JOE VERSUS THE VOLCANO,SLEEPLESS IN SEATTLE,B,NA,NA,NA,NA,NA,David Poltorak,DP47,hard,Current Affairs,yes,Isabella,yes
+What type of plant is bamboo?,TREE,GRASS,FERN,B,NA,NA,NA,NA,NA,Maureen Sherlock,MSK182,hard,History,yes,Graeme,no
+What is the main blood type of the population of Australia?,O-NEGATIVE,O-POSITIVE,A-POSITIVE,B,NA,NA,NA,NA,NA,David Poltorak,DP03,medium,Pop Culture,no,Graeme,no
+Which of these Aussies has not been nominated for an Oscar this year?,RUSSELL CROWE,JACKI WEAVER,NAOMI WATTS,A,NA,NA,NA,NA,NA,Maureen Sherlock,MSK206,easy,Science,yes,Isabella,yes

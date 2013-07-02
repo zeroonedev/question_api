@@ -14,7 +14,8 @@ describe Question do
       "producer_id"=>"3",
       "writer_id"=>"3",
       "writer_reference_1"=>"writer reference one", 
-      "writer_reference_2"=>"writer reference two"
+      "writer_reference_2"=>"writer reference two",
+      "is_multi" => false
     }
 
     @question = Question.new(
@@ -36,14 +37,18 @@ describe Question do
      :category_id,
      :difficulty_id,
      :extra_info,
-     :producer_id,
      :writer_id,
      :writer_reference_1,
      :writer_reference_2
     ].each do |field|
       it "should not be valid without #{field}" do
+
         @question.send("#{field.to_s}=".to_sym, nil)
         @question.save
+        if field == :question
+          p @question.is_multi
+          p @question.valid?
+        end
         expect(@question).not_to be_valid
       end
     end
@@ -59,5 +64,27 @@ describe Question do
     end
 
   end
+
+  describe "multi-choice questions" do
+
+    before(:each) do
+      @params = {"question"=>{
+        "is_multi"=>true, 
+        "category_id"=>5, 
+        "writer_id"=>2, 
+        "difficulty_id"=>1,
+        "batch_tag" => "SMH", 
+        "question"=>"What year did Britain declare Wolrd War 2 on Gemany?", 
+        "answer_a"=>"1938", "answer_b"=>"1945", "answer_c"=>"1939", "correct_answer"=>"C", 
+        "extra_info"=>"ex info", "writer_reference_1"=>"foobar", "writer_reference_2"=>"yes"}
+      }
+    end
+
+    it "should be valid" do
+      question = Question.create(@params['question'])
+      expect(question).to be_valid
+    end
+  end
+
 
 end
