@@ -20,7 +20,10 @@ class CreateQuestions < ActiveRecord::Migration
       t.integer :writer_id
       t.integer :category_id         
       t.integer :producer_id         
-      t.integer :difficulty_id   
+      t.integer :difficulty_id
+      t.integer :type_id   
+      t.integer :round_id
+      t.integer :spare_id
       t.boolean :verified   
       t.boolean :used
       t.boolean :is_multi     

@@ -7,9 +7,13 @@ QuestionServer::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   resources :questions
+  resources :episodes
 
   match 'questions.json' => 'cors#options', constraints: { method: 'OPTIONS' }
   match 'questions/:id.json' => 'cors#options', constraints: { method: 'OPTIONS' }
+
+  match 'episodes.json' => 'cors#options', constraints: { method: 'OPTIONS' }
+  match 'episodes/:id.json' => 'cors#options', constraints: { method: 'OPTIONS' }
 
 
   # The priority is based upon order of creation:

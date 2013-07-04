@@ -59,6 +59,7 @@ class Question < ActiveRecord::Base
   belongs_to :producer
   belongs_to :category
   belongs_to :difficulty
+  belongs_to :type, class_name: QuestionType, :foreign_key => "type_id"
 
 
   include Tire::Model::Search
@@ -105,6 +106,10 @@ class Question < ActiveRecord::Base
   #TODO make this less crazy
   def sanitize_errors
     errors.messages.map{|k, v| {k => v.join(" ")}  }.reduce({}){|memo, error| memo.merge!(error) }
+  end
+
+  def demote
+    SpareQuestion.find(id).save!
   end
 
 end

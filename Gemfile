@@ -16,8 +16,13 @@ gem 'rails_admin'
 group :test, :development do
   gem 'rspec-rails'
   gem 'json_spec'
-  gem 'turnip'
   gem 'pry-rails'
+  gem 'factory_girl_rails'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'faker'
+  gem 'launchy'
+  gem 'database_cleaner'
 end
 
 
