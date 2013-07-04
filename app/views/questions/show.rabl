@@ -1,5 +1,7 @@
 object @question
 
+node :error if @error
+
 attributes :is_multi,
            :question,
            :answer,

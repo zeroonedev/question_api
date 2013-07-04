@@ -12,11 +12,26 @@ child :rounds, object_root: false do
                :answer_a, 
                :answer_b,
                :answer_c,
-               :correct_answer
+               :correct_answer,
+               :category_id,
+               :difficulty_id
 
     child :category, object_root: false do
-      attributes :id
-                 :name
+      attribute  :id => :category_id
+      attributes :name
     end
   end
+
+  child :spares, object_root: false do
+    attributes :id,
+               :question, 
+               :answer, 
+               :answer_a, 
+               :answer_b,
+               :answer_c,
+               :correct_answer,
+               :category_id,
+               :difficulty_id
+  end
+
 end

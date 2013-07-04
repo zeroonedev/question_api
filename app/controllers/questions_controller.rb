@@ -3,7 +3,11 @@ class QuestionsController < CorsController
   before_filter :get_question, only: [:show, :edit, :update]
 
   def index
-    @questions = Question.search(params)
+    begin
+      @questions = Question.search(params)
+    rescue Exception => e
+      @error = e
+    end
   end
 
   def new

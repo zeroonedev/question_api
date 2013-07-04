@@ -175,5 +175,7 @@ end
 meta_data
 import_questions
 
+`rake environment tire:import CLASS='Question'`
+
 
 
