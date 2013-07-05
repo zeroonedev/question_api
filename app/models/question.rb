@@ -62,6 +62,8 @@ class Question < ActiveRecord::Base
   belongs_to :type, class_name: QuestionType, :foreign_key => "type_id"
 
 
+  scope :verified, -> { where(verified: true) }
+
   include Tire::Model::Search
   include Tire::Model::Callbacks
 

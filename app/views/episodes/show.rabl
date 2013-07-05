@@ -1,6 +1,7 @@
 object @episode
 
-attributes :rx_number,
+attributes :id,
+           :rx_number,
            :record_date
 
 child :rounds, object_root: false do
@@ -14,7 +15,8 @@ child :rounds, object_root: false do
                :answer_c,
                :correct_answer,
                :category_id,
-               :difficulty_id
+               :difficulty_id,
+               :is_multi
 
     child :category, object_root: false do
       attribute  :id => :category_id
@@ -31,7 +33,8 @@ child :rounds, object_root: false do
                :answer_c,
                :correct_answer,
                :category_id,
-               :difficulty_id
+               :difficulty_id,
+               :is_multi
   end
 
 end
