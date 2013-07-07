@@ -85,9 +85,10 @@ class Question < ActiveRecord::Base
        
        def self.search(params)
     tire.search(load: true     , default_opertor: "AND", match_all: {}) do |s|
-      s.size self.all.count
-      s.sort    { by :updated_at, "desc" } if params[:query].blank?
-      s.query { string params[:query] } if params[:query].present?
+      s.size params[:size].present? ? params[:size] : self.all.count
+      s.from params[:from] if params[:from].present?
+      s.sort  { by :updated_at, "desc" } if params[:query].blank?
+      s.query { string params[:query]  } if params[:query].present?
 
       s.filter :term, is_multi: params[:is_multi] if params[:is_multi].present?
       s.facet "is_multi" do
