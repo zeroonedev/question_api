@@ -6,7 +6,7 @@ class QuestionsController < CorsController
     begin
       @questions = Question.search(params)
     rescue Exception => e
-      @error = e
+      @notification = e
     end
   end
 

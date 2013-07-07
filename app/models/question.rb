@@ -46,7 +46,6 @@ class Question < ActiveRecord::Base
                         :batch_tag,
                         :category_id,
                         :difficulty_id,
-                        :extra_info,
                         :writer_id,
                         :writer_reference_1,
                         :writer_reference_2
@@ -68,22 +67,24 @@ class Question < ActiveRecord::Base
   include Tire::Model::Callbacks
 
   mapping do
-    indexes :id,          type: 'integer'
-    indexes :question,    boost: 10
-    indexes :answer,      boost: 9
-    indexes :answer_a,    boost: 9
-    indexes :answer_b,    boost: 9
-    indexes :answer_c,    boost: 9
+    indexes :id,               type: 'integer'
+    indexes :question,         boost: 10
+    indexes :answer,           boost: 9
+    indexes :answer_a,         boost: 9
+    indexes :answer_b,         boost: 9
+    indexes :answer_c,         boost: 9
     indexes :batch_tag
-    indexes :writer_id,   type: 'integer'
-    indexes :category_id, type: 'integer'
-    indexes :is_multi,    type: 'boolean'
-    indexes :verified,    type: 'boolean'
-    indexes :updated_at,  type: 'date'
-  end
-  
-  def self.search(params)
-    tire.search(load: true, default_opertor: "AND", match_all: {}) do |s|
+    indexes :writer_id,        type: 'integer'
+    indexes :category_id,      type: 'integer'
+    indexes :type_id, type: 'integer'
+    indexes :is_multi,         type: 'boolean'
+    indexes :verified,         type: 'boolean'
+    indexes :used,             type: 'boolean'
+    indexes :updated_at,       type: 'date'
+  end    
+       
+       def self.search(params)
+    tire.search(load: true     , default_opertor: "AND", match_all: {}) do |s|
       s.size self.all.count
       s.sort    { by :updated_at, "desc" } if params[:query].blank?
       s.query { string params[:query] } if params[:query].present?
@@ -102,6 +103,22 @@ class Question < ActiveRecord::Base
       s.facet "category" do
         terms :category_id
       end
+
+      s.filter :term, verified: params[:verified] if params[:verified].present?
+      s.facet "verified" do
+        terms :verified
+      end
+
+      s.filter :term, used: params[:used] if params[:used].present?
+      s.facet "used" do
+        terms :used
+      end
+
+      s.filter :term, type_id: params[:type_id] if params[:type_id].present?
+      s.facet "question_type" do
+        terms :type_id
+      end
+
     end
   end
 

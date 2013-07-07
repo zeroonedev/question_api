@@ -1,6 +1,48 @@
 require 'conformist'
 require 'csv'
 
+def difficulty_map key
+  source = {
+    "E" => "Easy",
+    "M" => "Medium",
+    "H" => "Hard"
+  }
+  source[key]
+end
+
+def writer_map key
+  source = {
+   "DP" => "David Poltorak", 
+   "GR" => "Graeme Rickerby",
+   "MS" => "Maureen Sherlock",
+   "MSS" => "Who is MSS?",
+   "MSK" => "Who is MSK?",
+   "GLC" => "Who is GLC?"
+  }
+  source[key]
+end
+
+def producer_map key
+  source = {
+    "DP" => "David Poltorak", 
+    "GR" => "Graeme Rickerby",
+    "MS" => "Maureen Sherlock",
+    "MSS" => "Who is MSS?",
+    "MSK" => "Who is MSK?",
+    "GLC" => "Who is GLC?",
+    "MLW" => "Who is MLW"
+  }
+  source[key]
+end
+
+def yes_no_map key
+  source = {
+    "Y" => true,
+    "N" => false
+  }
+  source[key]
+end
+
 def import_questions
   Question.delete_all
   single_choice_schema = Conformist.new do
@@ -42,12 +84,12 @@ def import_questions
 
   csv_importer = {
     single_question_csv:  {
-      file: CSV.open("db/test_question_data/question-answer.csv"),
+      file: CSV.open("db/test_question_data/real-data/single-choice.csv"),
       schema: single_choice_schema,
       is_multi: false
     },
     multi_choice_csv: { 
-      file: CSV.open("db/test_question_data/question-multi-answer.csv"),
+      file: CSV.open("db/test_question_data/real-data/multi-choice.csv"),
       schema: multi_choice_schema,
       is_multi: true
     }
@@ -68,16 +110,23 @@ def import_questions
         category_name = q.attributes.delete(:category)
         difficulty_name = q.attributes.delete(:difficulty)
 
+        writer_name = writer_map(writer_name)
         writer = Writer.find_or_create_by_name(writer_name)
+
+        producer_name = producer_map(producer_name)
         producer = Producer.find_or_create_by_name(producer_name)
+
         category = Category.find_or_create_by_name(category_name)
+        
+        difficulty_name = difficulty_map(difficulty_name)
         difficulty = Difficulty.find_or_create_by_name(difficulty_name)
 
         q.attributes[:is_multi] = is_multi
 
         question = Question.new(q.attributes)
 
-        p question_type
+        question.verified = yes_no_map(q.verified)
+        p question.verified
         
         question.type = question_type
         question.writer = writer

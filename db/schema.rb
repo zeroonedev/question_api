@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20130705011528) do
     t.string   "tx_number"
     t.string   "verifier_reference_1"
     t.string   "verifier_reference_2"
+    t.string   "notes"
     t.integer  "writer_id"
     t.integer  "category_id"
     t.integer  "producer_id"

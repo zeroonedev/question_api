@@ -17,6 +17,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.string  :verifier_reference_2 
       t.string  :writer_reference_1 
       t.string  :writer_reference_2 
+      t.string  :notes
       t.integer :writer_id
       t.integer :category_id         
       t.integer :producer_id         
