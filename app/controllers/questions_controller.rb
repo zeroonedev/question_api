@@ -5,6 +5,7 @@ class QuestionsController < CorsController
   def index
     begin
       @questions = Question.search(params)
+      @total =  @questions.total
     rescue Exception => e
       @notification = e
     end
