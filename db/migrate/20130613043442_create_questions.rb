@@ -1,23 +1,22 @@
 class CreateQuestions < ActiveRecord::Migration
   def change
     create_table :questions do |t|
-      t.string  :question
+      t.text  :question
       t.string  :answer
       t.string  :answer_a
       t.string  :answer_b
       t.string  :answer_c
       t.string  :correct_answer  
-      t.string  :extra_info 
-      t.string  :writer_reference_1
-      t.string  :writer_reference_2 
+      t.text  :writer_reference_1
+      t.text  :writer_reference_2 
       t.string  :batch_tag 
-      t.string  :extra_info
+      t.text    :extra_info
       t.string  :tx_number
-      t.string  :verifier_reference_1 
-      t.string  :verifier_reference_2 
-      t.string  :writer_reference_1 
-      t.string  :writer_reference_2 
-      t.string  :notes
+      t.text  :verifier_reference_1 
+      t.text  :verifier_reference_2 
+      t.text  :writer_reference_1 
+      t.text  :writer_reference_2 
+      t.text  :notes
       t.integer :writer_id
       t.integer :category_id         
       t.integer :producer_id         

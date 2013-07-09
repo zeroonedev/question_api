@@ -5,7 +5,7 @@ gem 'rack-cors', :require => 'rack/cors'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'mysql2'
 gem 'rabl'
 gem 'conformist'
 gem 'tire'
@@ -25,6 +25,8 @@ group :test, :development do
   gem 'launchy'
   gem 'database_cleaner'
 end
+
+
 
 
 # To use ActiveModel has_secure_password
