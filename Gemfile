@@ -10,6 +10,7 @@ gem 'rabl'
 gem 'conformist'
 gem 'tire'
 gem 'rails_admin'
+gem 'puma', '~> 2.1.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
