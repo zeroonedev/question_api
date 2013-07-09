@@ -1,0 +1,29 @@
+<form>
+    <fieldset>
+        <div class="row">
+            <div class="span12">
+                <div class="row">
+                    <div class="span5">
+                        <label for="rx-number" class="align-label">RX#</label>
+                        <input type="text" id="rx-number" class="span3" placeholder="Enter Record Number"
+                               ng-model="episode.rx_number">
+
+                        <label for="record-date" class="align-label">Record Date</label>
+                        <input type="date" name="record-date" class="span3" placeholder="Record Date"
+                               ng-model="episode.record_date">
+                    </div>
+                    <div class="span7">
+
+                        <button type="button" class="btn btn-default btn-primary"
+                                ng-click="generateEpisode()">Generate Episode</button>
+                        <button type="button" class="btn">Print</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="button" class="btn btn-danger">Cancel</button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </fieldset>
+</form>

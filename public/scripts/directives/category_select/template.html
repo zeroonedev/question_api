@@ -1,0 +1,5 @@
+<select ng-model="question.category_id"
+        ng-options="c.category_id as c.name for c in categories"
+        ng-change="search()"
+        class="span3">
+</select>

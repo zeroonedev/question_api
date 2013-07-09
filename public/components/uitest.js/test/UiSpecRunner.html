@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <title>Jasmine Test Runner</title>
+    <link rel="stylesheet" href="lib/jasmine.css">
+
+    <script type="text/javascript" src="lib/jasmine.js"></script>
+    <script type="text/javascript" src="lib/jasmine-html.js"></script>
+    <script type="text/javascript" src="../dist/uitest.js"></script>
+    <script type="text/javascript" src="lib/testutils.js"></script>
+    <script type="text/javascript" src="lib/uitestutils.js"></script>
+
+    <!-- include spec files here... -->
+    <script type="text/javascript" src="ui/basicSpec.js"></script>
+    <script type="text/javascript" src="ui/mobileSpec.js"></script>
+    <script type="text/javascript" src="ui/angularSpec.js"></script>
+    <script type="text/javascript" src="ui/requirejsSpec.js"></script>
+
+</head>
+<body>
+<!-- execute jasmine tests -->
+<script type="text/javascript">
+    var reporter = new jasmine.TrivialReporter();
+    jasmine.getEnv().addReporter(reporter);
+    jasmine.getEnv().specFilter = function(spec) {
+        return reporter.specFilter(spec);
+    };
+    jasmine.getEnv().execute();
+
+</script>
+
+</body>
+</html>

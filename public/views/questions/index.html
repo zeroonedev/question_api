@@ -1,0 +1,130 @@
+<hr>
+
+<form>
+    <fieldset>
+        <div class="row">
+            <div class="span12">
+                <div class="row">
+                    <div class="span6">
+                        <div class="row">
+                            <div class="span3">
+                                <select ng-model="searchQuery.writer_id"
+                                        ng-options="w.writer_id as w.name for w in writers"
+                                        ng-change="search()"
+                                        class="span3">
+                                </select>
+
+                                <select ng-model="searchQuery.category_id"
+                                        ng-options="c.category_id as c.name for c in categories"
+                                        ng-change="search()"
+                                        class="span3">
+                                </select>
+                            </div>
+                            <div class="span3">
+                                <label for="verified" class="checkbox inline">Verified</label>
+
+                                <select id="verified"
+                                        ng-options="vo.value as vo.name for vo in verified_options"
+                                        ng-model="searchQuery.verified"
+                                        ng-change="search()"></select>
+
+                                <label for="used" class="checkbox inline">
+                                    <input type="checkbox" name="used" id="used"
+                                           ng-model="searchQuery.used"
+                                           ng-change="search()">Used
+                                </label>
+
+
+                                <label for="mc" class="checkbox inline">Question Type</label>
+
+                                <select id="question-type"
+                                        ng-options="qt.question_type_id as qt.name for qt in question_types"
+                                        ng-model="searchQuery.type_id"
+                                        ng-change="search()"></select>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <textarea ng-model="searchQuery.query"
+                                  ng-change="search()"
+                                  name="question" id="query" class="span6" rows="3" placeholder="Keyword Search: Question, Answer, Question ID, Batch Tag"></textarea>
+
+                        <button ng-click="search()" type="submit" class="btn btn-primary pull-right">Search</button>
+                        <button ng-click="clearSearch()" type="button" class="btn pull-right mright">Show All</button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </fieldset>
+</form>
+<div class="row">
+    <div class="span12">
+
+        {{ searchMetadata() }}
+        <pagination rotate="false"
+                    num-pages="searchMetadata().numberOfPages()"
+                    current-page="searchMetadata().currentPage()"
+                    max-size="searchMetadata.maxSize"
+                    class="pagination-mini"
+                    boundary-links="true"
+                    on-select-page="setPage()"></pagination>
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="span12">
+        <table id="questions-table" class="table table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <!--<th>Type</th>-->
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Batch Tag</th>
+                <th>Category</th>
+                <th>Verified</th>
+                <th>Used</th>
+                <th>TX#</th>
+                <th>Edit</th>
+            </tr>
+            </thead>
+            <tbody>
+
+                <tr ng-repeat="question in questions">
+                    <td id="question-id">{{question.id}}</td>
+                    <!--<td id="question-type">{{question.type}}</td>-->
+                    <td id="question">{{question.question}}</td>
+                    <td id="answer">
+
+                      <div ng-hide="question.is_multi">
+                        {{question.answer}}
+                      </div>
+
+                      <div ng-show="question.is_multi">
+                          <ul>
+                              <li>A: {{ question.answer_a }}</li>
+                              <li>B: {{ question.answer_b }}</li>
+                              <li>C: {{ question.answer_c }}</li>
+                              <li>Correct: {{ question.correct_answer }}</li>
+                          </ul>
+                      </div>
+
+                    </td>
+                    <td id="batch_tag">{{question.batch_tag}}</td>
+                    <td id="category">{{question.category}}</td>
+                    <td id="verified"><span class="label label-success">{{question.verified}}</span></td>
+                    <td id="used"><span class="label label-important">{{question.used}}</span></td>
+                    <td  id="tx_number">{{question.tx_number}}</td>
+                    <td><button type="button" class="btn btn-small" ng-click="editQuestion(question.id)">Edit</button></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

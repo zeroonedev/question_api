@@ -16,6 +16,9 @@ QuestionServer::Application.routes.draw do
   match 'episodes/:id.json' => 'cors#options', constraints: { method: 'OPTIONS' }
 
 
+  root :to => "client#index" 
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

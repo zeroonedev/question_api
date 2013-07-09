@@ -1,0 +1,8 @@
+{
+  "name": "uitest.js",
+  "version": "0.9.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tigbro/uitest.js.git"
+  }
+}

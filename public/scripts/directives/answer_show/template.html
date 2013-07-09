@@ -1,0 +1,7 @@
+<span ng-hide="question.is_multi">{{ question.answer }}</span>
+<ul ng-show="question.is_multi">
+    <li>A: {{ question.answer_a }}</li>
+    <li>B: {{ question.answer_b }}</li>
+    <li>C: {{ question.answer_c }}</li>
+    <li>Correct: {{ question.correct_answer }}</li>
+</ul>
