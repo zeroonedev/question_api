@@ -5,10 +5,9 @@ angular.module("appInterceptors", ['sharedServices']).config(function($httpProvi
     var questions;
     if (/questions.json/.test(response.config.url)) {
       questions = response.data;
-      SearchMetadata.setMaxSize(20);
       SearchMetadata.setCurrentPage(0);
+      SearchMetadata.setMaxSize(20);
       SearchMetadata.setTotalResults(questions);
-      console.log($rootScope);
       return questions;
     }
   };

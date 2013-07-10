@@ -1,8 +1,7 @@
 'use strict';
 angular.module('questionApp').factory('Question', function($resource) {
-  return $resource("http://localhost:port/questions/:id.json", {
-    id: '@id',
-    port: ':3000'
+  return $resource("/questions/:id.json", {
+    id: '@id'
   }, {
     update: {
       method: 'PUT'
@@ -15,7 +14,7 @@ angular.module('questionApp').factory('Question', function($resource) {
     if (!paginationParams) {
       paginationParams = {
         from: 0,
-        size: 20
+        size: 40
       };
     }
     Question.query(paginationParams, function(questions) {

@@ -3,13 +3,19 @@ var services;
 
 services = angular.module('questionApp').controller('QuestionsCtrl', function($scope, questions, $filter, $location, Question, FormMetadata, SearchMetadata) {
   $scope.setTitle("Question");
-  $scope.searchMetadata = SearchMetadata.meta;
-  $scope.setPage = function(pageNo) {
-    $scope.searchMetadata.currentPage = pageNo;
-    $scope.searchMetadata.searchQuery.from = $scope.currentPage;
-    $scope.searchMetadata.searchQuery.size = $scope.maxSize;
-    return $scope.search();
+  
+  $scope.setPage = function (pageNo) {
+    $scope.currentPage = pageNo;
+    $scope.searchQuery.from = pageNo;
+    $scope.searchQuery.size = $scope.maxSize;
+    console.log($scope.searchQuery)
+    $scope.search(); 
   };
+
+  $scope.noOfPages = SearchMetadata.numberOfPages();
+  $scope.currentPage = 1;
+  $scope.maxSize = SearchMetadata.maxSize();
+
   $scope.searchQuery = {};
   $scope.questions = questions;
   $scope = FormMetadata.metafy($scope);

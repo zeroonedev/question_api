@@ -10,6 +10,7 @@ angular.module('sharedServices', []).factory('SearchMetadata', function($rootSco
       return console.log($rootScope.searchMetaData);
     },
     totalResults: function() {
+      console.log("totalResults")
       return $rootScope.searchMetaData.totalResults;
     },
     setMaxSize: function(maxSize) {
@@ -26,7 +27,8 @@ angular.module('sharedServices', []).factory('SearchMetadata', function($rootSco
     },
     numberOfPages: function() {
       var num;
-      num = $rootScope.totalResults / $rootScope.maxSize;
+      num = $rootScope.searchMetaData.totalResults / $rootScope.searchMetaData.maxSize;
+      console.log($rootScope)
       return num;
     },
     meta: function() {
