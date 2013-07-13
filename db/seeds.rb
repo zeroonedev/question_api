@@ -222,7 +222,10 @@ def meta_data
 end
 
 meta_data
-import_questions
+
+unless Rails.env.test?
+  import_questions
+end
 
 `rake environment tire:import CLASS='Question'`
 

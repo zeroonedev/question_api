@@ -38,17 +38,20 @@ class Question < ActiveRecord::Base
                   :answer_a, 
                   :answer_b, 
                   :answer_c,
-                  :correct_answer
+                  :correct_answer,
+                  :type_id,
+                  :notes
 
 
-  validates_inclusion_of :is_multi, :in => [true, false]
+  # validates_inclusion_of :is_multi, :in => [true, false]
   validates_presence_of :question,
                         :batch_tag,
                         :category_id,
                         :difficulty_id,
                         :writer_id,
                         :writer_reference_1,
-                        :writer_reference_2
+                        :writer_reference_2,
+                        :type_id
 
   validates_uniqueness_of :question
 
@@ -65,6 +68,10 @@ class Question < ActiveRecord::Base
 
   include Tire::Model::Search
   include Tire::Model::Callbacks
+
+  after_save do
+    update_index
+  end
 
   mapping do
     indexes :id,               type: 'integer'

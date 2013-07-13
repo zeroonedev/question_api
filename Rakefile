@@ -3,6 +3,7 @@
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
 require File.expand_path('../config/application', __FILE__)
+require 'database_cleaner'
 
 QuestionServer::Application.load_tasks
 
@@ -18,8 +19,11 @@ task :stop_server do
   `kill -9 $(cat tmp/pids/server.pid)`
 end
 
-task :start_search_server do
+task :start_search_server do 
   `elasticsearch -f -D es.config=/usr/local/Cellar/elasticsearch/0.90.1/config/elasticsearch.yml`
 end
 
-
+task :clean_db => :environment do
+  DatabaseCleaner.strategy = :truncation
+  DatabaseCleaner.clean
+end

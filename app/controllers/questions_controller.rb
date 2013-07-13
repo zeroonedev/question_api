@@ -19,7 +19,9 @@ class QuestionsController < CorsController
     @question = Question.create(params[:question])
     if @question.valid?
       render :show
+      @notification = "Question '#{@question.question}' created successfully."
     else
+      @question.errors  
       render :new
     end
   end

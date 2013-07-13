@@ -28,19 +28,20 @@
                                         ng-model="searchQuery.verified"
                                         ng-change="search()"></select>
 
+
+                                <label for="mc" class="checkbox inline">Question Type</label>
+
+                                <select id="question-type"
+                                        ng-options="qt.type_id as qt.name for qt in question_types"
+                                        ng-model="searchQuery.type_id"
+                                        ng-change="search()"></select>
+
                                 <label for="used" class="checkbox inline">
                                     <input type="checkbox" name="used" id="used"
                                            ng-model="searchQuery.used"
                                            ng-change="search()">Used
                                 </label>
 
-
-                                <label for="mc" class="checkbox inline">Question Type</label>
-
-                                <select id="question-type"
-                                        ng-options="qt.question_type_id as qt.name for qt in question_types"
-                                        ng-model="searchQuery.type_id"
-                                        ng-change="search()"></select>
 
 
                             </div>
@@ -98,8 +99,8 @@
                 <tr ng-repeat="question in questions">
                     <td id="question-id">{{question.id}}</td>
                     <!--<td id="question-type">{{question.type}}</td>-->
-                    <td id="question">{{question.question}}</td>
-                    <td id="answer">
+                    <td id="question[{{$index}}]">{{question.question}}</td>
+                    <td id="answer[{{$index}}]">
 
                       <div ng-hide="question.is_multi">
                         {{question.answer}}
@@ -115,11 +116,11 @@
                       </div>
 
                     </td>
-                    <td id="batch_tag">{{question.batch_tag}}</td>
-                    <td id="category">{{question.category}}</td>
-                    <td id="verified"><span class="label label-success">{{question.verified}}</span></td>
-                    <td id="used"><span class="label label-important">{{question.used}}</span></td>
-                    <td  id="tx_number">{{question.tx_number}}</td>
+                    <td id="batch_tag[{{$index}}]">{{question.batch_tag}}</td>
+                    <td id="category[{{$index}}]">{{question.category}}</td>
+                    <td id="verified[{{$index}}]"><span class="label label-success">{{question.verified}}</span></td>
+                    <td id="used[{{$index}}]"><span class="label label-important">{{question.used}}</span></td>
+                    <td  id="tx_number[{{$index}}]">{{question.tx_number}}</td>
                     <td><button type="button" class="btn btn-small" ng-click="editQuestion(question.id)">Edit</button></td>
                 </tr>
 
