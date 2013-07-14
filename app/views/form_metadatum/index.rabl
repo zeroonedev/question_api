@@ -1,0 +1,2 @@
+object @meta
+attributes :type

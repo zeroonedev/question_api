@@ -7,6 +7,7 @@ gem 'rack-cors', :require => 'rack/cors'
 
 gem 'mysql2'
 gem 'rabl'
+gem 'oj'
 gem 'conformist'
 gem 'tire'
 gem 'rails_admin'

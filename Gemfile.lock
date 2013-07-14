@@ -111,6 +111,7 @@ GEM
     nested_form (0.3.2)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
+    oj (2.1.4)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
     pry (0.9.12.2)
@@ -234,6 +235,7 @@ DEPENDENCIES
   json_spec
   launchy
   mysql2
+  oj
   pry-rails
   puma (~> 2.1.0)
   rabl

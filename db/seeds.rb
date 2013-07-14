@@ -10,29 +10,39 @@ def difficulty_map key
   source[key]
 end
 
-def writer_map key
-  source = {
-   "DP" => "David Poltorak", 
-   "GR" => "Graeme Rickerby",
-   "MS" => "Maureen Sherlock",
-   "MSS" => "Who is MSS?",
-   "MSK" => "Who is MSK?",
-   "GLC" => "Who is GLC?"
-  }
-  source[key]
-end
+# Guy Le Couteur  GLC -
+# Michelle Seers  MSS -
+# Maureen Sherlock MSK -
+# Matthew  Parkinson MP -
+# Graeme Rickerby GR -
+# David Poltorak DP
+# Maureen Wyse MLW
 
-def producer_map key
-  source = {
+def writer_map key
+  {
     "DP" => "David Poltorak", 
     "GR" => "Graeme Rickerby",
-    "MS" => "Maureen Sherlock",
-    "MSS" => "Who is MSS?",
-    "MSK" => "Who is MSK?",
-    "GLC" => "Who is GLC?",
-    "MLW" => "Who is MLW"
-  }
-  source[key]
+    "MSK" => "Maureen Sherlock",
+    "MSS" => "Michelle Seers",
+    "GLC" => "Guy Le Couteur",
+    "MLW" => "Maureen Wyse",
+  }[key]
+end
+
+# Guy Le Couteur  GLC - 
+# Michelle Seers  MSS - 
+# Maureen Sherlock MSK - 
+# Matthew  Parkinson MP 
+# Graeme Rickerby GR
+
+def producer_map key
+  {
+    "DP" => "David Poltorak", 
+    "GR" => "Graeme Rickerby",
+    "MSK" => "Maureen Sherlock",
+    "GLC" => "Guy Le Couteur",
+    "MP" => "Matthew  Parkinson"
+  }[key]
 end
 
 def yes_no_map key
@@ -43,7 +53,25 @@ def yes_no_map key
   source[key]
 end
 
+# csv fields
+# question
+# answer
+# extra_info
+# writer_reference_1
+# writer_reference_2
+# verifier_reference_1
+# verifier_reference_2
+# writer
+# batch_tag
+# difficulty
+# category
+# verified
+# producer
+# used
+
+
 def import_questions
+  
   Question.delete_all
   single_choice_schema = Conformist.new do
     column :question

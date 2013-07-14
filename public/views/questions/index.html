@@ -6,16 +6,18 @@
             <div class="span12">
                 <div class="row">
                     <div class="span6">
+                        {{ searchQuery }}
                         <div class="row">
                             <div class="span3">
+
                                 <select ng-model="searchQuery.writer_id"
-                                        ng-options="w.writer_id as w.name for w in writers"
+                                        ng-options="w.id as w.name for w in writers"
                                         ng-change="search()"
                                         class="span3">
                                 </select>
 
                                 <select ng-model="searchQuery.category_id"
-                                        ng-options="c.category_id as c.name for c in categories"
+                                        ng-options="c.id as c.name for c in categories"
                                         ng-change="search()"
                                         class="span3">
                                 </select>
@@ -32,9 +34,16 @@
                                 <label for="mc" class="checkbox inline">Question Type</label>
 
                                 <select id="question-type"
-                                        ng-options="qt.type_id as qt.name for qt in question_types"
+                                        ng-options="qt.id as qt.name for qt in question_types"
                                         ng-model="searchQuery.type_id"
                                         ng-change="search()"></select>
+
+                                <label for="difficulty" class="align-label">Difficulty</label>
+                                <select ng-model="searchQuery.difficulty_id"
+                                        ng-options="d.id as d.name for d in difficulties"
+                                        ng-change="search()"
+                                        class="span3">
+                                </select>
 
                                 <label for="used" class="checkbox inline">
                                     <input type="checkbox" name="used" id="used"

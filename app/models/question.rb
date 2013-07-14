@@ -83,7 +83,8 @@ class Question < ActiveRecord::Base
     indexes :batch_tag
     indexes :writer_id,        type: 'integer'
     indexes :category_id,      type: 'integer'
-    indexes :type_id, type: 'integer'
+    indexes :type_id,          type: 'integer'
+    indexes :difficulty_id,    type: 'integer'
     indexes :is_multi,         type: 'boolean'
     indexes :verified,         type: 'boolean'
     indexes :used,             type: 'boolean'
@@ -97,7 +98,7 @@ class Question < ActiveRecord::Base
       s.sort  { by :updated_at, "desc" } if params[:query].blank?
       s.query { string params[:query]  } if params[:query].present?
 
-      s.filter :term, is_multi: params[:is_multi] if params[:is_multi].present?
+      s.filter :term, is_multi: params[:is_multi] if params[:is_multi].present? and 
       s.facet "is_multi" do
         terms :is_multi
       end
@@ -110,6 +111,11 @@ class Question < ActiveRecord::Base
       s.filter :term, category_id: params[:category_id] if params[:category_id].present?
       s.facet "category" do
         terms :category_id
+      end
+
+      s.filter :term, difficulty_id: params[:difficulty_id] if params[:difficulty_id].present?
+      s.facet "difficulty" do
+        terms :difficulty_id
       end
 
       s.filter :term, verified: params[:verified] if params[:verified].present?
