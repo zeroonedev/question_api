@@ -112,12 +112,12 @@ def import_questions
 
   csv_importer = {
     single_question_csv:  {
-      file: CSV.open("db/test_question_data/real-data/single-choice.csv"),
+      file: CSV.open("db/test_question_data/real-data/QA_questions_final.csv"),
       schema: single_choice_schema,
       is_multi: false
     },
     multi_choice_csv: { 
-      file: CSV.open("db/test_question_data/real-data/multi-choice.csv"),
+      file: CSV.open("db/test_question_data/real-data/MC_questions_final.csv"),
       schema: multi_choice_schema,
       is_multi: true
     }
@@ -154,7 +154,6 @@ def import_questions
         question = Question.new(q.attributes)
 
         question.verified = yes_no_map(q.verified)
-        p question.verified
         
         question.type = question_type
         question.writer = writer
@@ -164,8 +163,8 @@ def import_questions
 
         question.save
 
-        puts "saved ok" if question.valid?
         unless question.valid?
+          p question.question
           p question.errors.messages
         end
       end
