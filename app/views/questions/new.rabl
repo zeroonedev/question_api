@@ -4,6 +4,10 @@ node(:errors) { |question|
   question.sanitize_errors 
 }
 
+node(:meta) do |question|
+  question.new_metadata
+end
+
 attributes :question,
            :answer,
            :answer_a,

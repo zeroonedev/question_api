@@ -1,6 +1,6 @@
 collection @questions
 
-node(:notification) do
+node(:errors) do
   @notification
 end
 

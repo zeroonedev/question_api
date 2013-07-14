@@ -80,19 +80,19 @@
 
                         <label for="writer" class="align-label">Writer</label>
                         <select ng-model="question.writer_id"
-                                ng-options="w.writer_id as w.name for w in writers"
+                                ng-options="w.id as w.name for w in writers"
                                 ng-change="search()"
                                 class="span3">
                         </select>
                         <span class="field-validation-error">{{question.errors['writer_id']}}</span>
 
-                        <label for="b-id" class="align-label">Batch Tag</label>
-                        <input ng-model="question.batch_tag" type="text" name="b-id" class="span2" id="q-id" placeholder="Enter Batch Tag">
+                        <label for="b-id" class="align-label">Batch ID</label>
+                        <input ng-model="question.batch_tag" type="text" name="b-id" class="span2" id="q-id" placeholder="Enter Batch ID">
                         <span class="field-validation-error">{{question.errors['batch_tag']}}</span>
 
                         <label for="difficulty" class="align-label">Difficulty</label>
                         <select ng-model="question.difficulty_id"
-                                ng-options="d.difficulty_id as d.name for d in difficulties"
+                                ng-options="d.id as d.name for d in difficulties"
                                 ng-change="search()"
                                 class="span3">
                         </select>
@@ -101,7 +101,7 @@
 
                         <label for="category" class="align-label">Category</label>
                         <select ng-model="question.category_id"
-                                ng-options="c.category_id as c.name for c in categories"
+                                ng-options="c.id as c.name for c in categories"
                                 ng-change="search()"
                                 class="span3">
                         </select>
@@ -116,11 +116,10 @@
                                 Verified
                             </label>
 
-                            <select ng-model="question.producer_id" name="producer">
-                                <option value="1">Producer</option>
-                                <option value="2">Rob Menzies</option>
-                                <option value="3">Graeme Rickerby</option>
-                                <option value="4">Riima Daher</option>
+                            <select ng-model="question.producer_id"
+                                    ng-options="p.id as p.name for p in producers"
+                                    ng-change="search()"
+                                    class="span3">
                             </select>
 
                             <label for="used" class="align-label inline">

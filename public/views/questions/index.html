@@ -1,4 +1,7 @@
+<render-system-alert></render-system-alert>
 <hr>
+
+        {{ searchQuery }}
 
 <form>
     <fieldset>
@@ -6,16 +9,17 @@
             <div class="span12">
                 <div class="row">
                     <div class="span6">
-                        {{ searchQuery }}
+
                         <div class="row">
                             <div class="span3">
-
+                                <label for="writer" class="align-label">Writer</label>
                                 <select ng-model="searchQuery.writer_id"
                                         ng-options="w.id as w.name for w in writers"
                                         ng-change="search()"
                                         class="span3">
                                 </select>
 
+                                <label for="category" class="align-label">Category</label>
                                 <select ng-model="searchQuery.category_id"
                                         ng-options="c.id as c.name for c in categories"
                                         ng-change="search()"
@@ -45,13 +49,12 @@
                                         class="span3">
                                 </select>
 
-                                <label for="used" class="checkbox inline">
-                                    <input type="checkbox" name="used" id="used"
-                                           ng-model="searchQuery.used"
-                                           ng-change="search()">Used
-                                </label>
-
-
+                                <label for="used" class="checkbox inline">Used</label>
+                                <select ng-model="searchQuery.used"
+                                        ng-options="uo.value as uo.name for uo in used_options"
+                                        ng-change="search()"
+                                        class="span3">
+                                </select>
 
                             </div>
                         </div>

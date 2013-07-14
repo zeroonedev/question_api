@@ -91,7 +91,7 @@ class Question < ActiveRecord::Base
     indexes :updated_at,       type: 'date'
   end    
        
-       def self.search(params)
+  def self.search(params)
     tire.search(load: true     , default_opertor: "AND", match_all: {}) do |s|
       s.size params[:size].present? ? params[:size] : self.all.count
       s.from params[:from] if params[:from].present?

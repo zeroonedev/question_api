@@ -11,6 +11,11 @@ class FormMetadataFactory
         all_value_option,
         { name: "Verified", value: true },
         { name: "Un-verified", value: false }
+      ],
+      used_options: [
+        all_value_option,
+        { name: "Used",     value: true },
+        { name: "Not used", value: false },
       ]
     }
   end
