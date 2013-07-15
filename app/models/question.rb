@@ -2,6 +2,7 @@
 class QuestionTypeValidator < ActiveModel::Validator
 
   def validate(record)
+    p record
     if record.is_multi
       record.errors.add :answer_a, "can't be blank" if record.answer_a.blank? 
       record.errors.add :answer_b, "can't be blank" if record.answer_b.blank? 
@@ -34,7 +35,6 @@ class Question < ActiveRecord::Base
                   :writer_reference_2, 
                   :created_at,
                   :updated_at,
-                  :is_multi,
                   :answer_a, 
                   :answer_b, 
                   :answer_c,
@@ -42,8 +42,6 @@ class Question < ActiveRecord::Base
                   :type_id,
                   :notes
 
-
-  # validates_inclusion_of :is_multi, :in => [true, false]
   validates_presence_of :question,
                         :batch_tag,
                         :category_id,
@@ -143,6 +141,10 @@ class Question < ActiveRecord::Base
 
   def demote
     SpareQuestion.find(id).save!
+  end
+
+  def is_multi
+    type == QuestionType.multi
   end
 
 end

@@ -21,7 +21,6 @@ class QuestionsController < CorsController
       render :show
       @notification = "Question '#{@question.question}' created successfully."
     else
-      p @question.errors  
       render :new
     end
   end
@@ -33,7 +32,6 @@ class QuestionsController < CorsController
     if @question.update_attributes(params[:question])
       render :show
     else
-      p @question.errors
       render :edit
     end
   end
