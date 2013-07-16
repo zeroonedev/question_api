@@ -2,8 +2,7 @@ object @question
 
 node :error if @error
 
-attributes :is_multi,
-           :question,
+attributes :question,
            :answer,
            :answer_a,
            :answer_b,

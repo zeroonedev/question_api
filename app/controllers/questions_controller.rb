@@ -1,5 +1,6 @@
 class QuestionsController < CorsController
 
+  before_filter :authenticate_user!
   before_filter :get_question, only: [:show, :edit, :update]
 
   def index
@@ -37,6 +38,12 @@ class QuestionsController < CorsController
   end
 
   def show
+  end
+
+  def destroy
+    get_question
+    @question.destroy
+    render json: { notice: "Question: @question.question, deleted successfully." }
   end
 
   private

@@ -5,9 +5,15 @@ class SessionsController < Devise::SessionsController
   after_filter  :set_csrf_cookie_for_ng
 
 
+  def new
+    # self.resource = build_resource(nil, :unsafe => true)
+    # clean_up_passwords(resource)
+    # respond_with(resource, serialize_options(resource))
+    render :json => { message: "login required" }, status: 401
+  end
+
   def create
     resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
-    pry
     sign_in_and_redirect(resource_name, resource)
   end
  
@@ -15,13 +21,12 @@ class SessionsController < Devise::SessionsController
     scope = Devise::Mapping.find_scope!(resource_or_scope)
     resource ||= resource_or_scope
     sign_in(scope, resource) unless warden.user(scope) == resource
-    return render :json => {:success => true}
+    return render :json => {:success => true, user: current_user }
   end
  
   def failure
     return render :json => {:success => false, :errors => ["Login failed."]}
   end
-
 
   #cors
   def set_csrf_cookie_for_ng
@@ -42,7 +47,6 @@ class SessionsController < Devise::SessionsController
   def options
     head(:ok)
   end
-
 
   protected
 

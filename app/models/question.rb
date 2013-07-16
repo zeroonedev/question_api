@@ -68,7 +68,11 @@ class Question < ActiveRecord::Base
   include Tire::Model::Callbacks
 
   after_save do
-    update_index
+    if deleted_at.nil?
+      self.index.store self
+    else
+      self.index.remove self
+    end
   end
 
   mapping do
