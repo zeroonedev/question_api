@@ -18,15 +18,16 @@ gem 'puma', '~> 2.1.0'
 group :test, :development do
   gem 'rspec-rails'
   gem 'json_spec'
-  gem 'pry-rails'
+  gem 'pry', '~> 0.9.12.2'
   gem 'factory_girl_rails'
   gem 'guard'
   gem 'guard-rspec'
   gem 'faker'
   gem 'launchy'
+  gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
+  gem 'cucumber-api-steps', :require => false
 end
-
 
 
 
