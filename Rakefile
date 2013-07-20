@@ -36,6 +36,7 @@ task :copy_front_end do
 end
 
 task :clean_db => :environment do
+  return if Rails.env.production?
   DatabaseCleaner.strategy = :truncation
   DatabaseCleaner.clean
 end
