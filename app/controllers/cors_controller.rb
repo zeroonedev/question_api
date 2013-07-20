@@ -1,4 +1,9 @@
 class CorsController < ActionController::Base
+
+  rescue_from CanCan::AccessDenied do |exception|
+    render json: { message: "Not found" }, status: 403
+  end
+
   protect_from_forgery
 
   before_filter :allow_cors_requests
@@ -22,7 +27,6 @@ end
   def options
     head(:ok)
   end
-
 
   protected
 

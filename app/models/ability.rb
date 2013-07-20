@@ -10,6 +10,7 @@ class Ability
 
       if user.writer?
         can :manage, Question
+        can :index, Question 
       end
 
   end

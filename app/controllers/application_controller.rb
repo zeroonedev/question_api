@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
   
   rescue_from CanCan::AccessDenied do |exception|
-    pry
-    # render_403
+    render json: { message: "Not found" }, status: 403
   end
 
   protect_from_forgery
