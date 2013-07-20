@@ -9,6 +9,7 @@ class Ability
       end
 
       if user.writer?
+        
         can :manage, Question
         can :index, Question 
       end
