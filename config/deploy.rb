@@ -1,6 +1,7 @@
 set :stages, %w(development production staging)
 set :default_stage, "development"
 require 'capistrano/ext/multistage'
+require 'bundler/capistrano'
 
 set :application, "question_api"
 set :user, "www-data"
@@ -14,6 +15,10 @@ set :rails_env, 'production'
 set :use_sudo, false
 set :normalize_asset_timestamps, false
 set :git_enable_submodules, 1
+
+after :update_code do
+  ``
+end
 
 task :start do
   `bundle exec puma -e production -d -b unix:///var/run/question_api.sock  --pidfile /var/run/puma.pid`
