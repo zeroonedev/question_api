@@ -1,0 +1,1 @@
+server 'mdm-database.zeroone.com', :app, :web, :db, :primary => true

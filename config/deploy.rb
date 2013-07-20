@@ -1,0 +1,31 @@
+set :stages, %w(development production staging)
+set :default_stage, "development"
+require 'capistrano/ext/multistage'
+
+set :application, "question_api"
+set :user, "www-data"
+set :group, "www-data"
+
+set :scm, :git
+set :repository, "git@github.com:zeroonedev/#{application}.git"
+set :deploy_to, "/var/www/#{application}"
+set :deploy_via, :remote_cache
+set :rails_env, 'production'
+set :use_sudo, false
+set :normalize_asset_timestamps, false
+
+  task :start do
+    `bundle exec puma -e production -d -b unix:///var/run/question_api.sock  --pidfile /var/run/puma.pid`
+  end
+
+  task :stop do
+    `kill -s SIGTERM $(cat /var/run/puma.pid)`
+  end
+
+  task :restart do
+    `kill -s SIGUSR2 $(cat /var/run/puma.pid)`
+  end
+
+task :uname do
+  run "uname -a"
+end

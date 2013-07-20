@@ -1,0 +1,1 @@
+server 'deploy@qdev', :app, :web, :db, :primary => true

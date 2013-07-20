@@ -1,0 +1,1 @@
+server 'qstaging', :app, :web, :db, :primary => true
