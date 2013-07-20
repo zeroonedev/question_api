@@ -1,5 +1,8 @@
 class EpisodesController < CorsController
 
+  before_filter :authenticate_user!
+  authorize_resource
+
   def create
     @episode = Episode.generate(
       params[:episode]

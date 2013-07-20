@@ -12,6 +12,7 @@ gem 'conformist'
 gem 'tire'
 gem 'rails_admin'
 gem 'puma', '~> 2.1.0'
+gem "cancan"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -27,6 +28,8 @@ group :test, :development do
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
   gem 'cucumber-api-steps', :require => false
+  gem 'selenium-webdriver'
+  # gem 'gizmo', git: 'git@github.com:impurist/gizmo.git'
 end
 
 

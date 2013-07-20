@@ -21,7 +21,7 @@ class SessionsController < Devise::SessionsController
     scope = Devise::Mapping.find_scope!(resource_or_scope)
     resource ||= resource_or_scope
     sign_in(scope, resource) unless warden.user(scope) == resource
-    return render :json => {:success => true, user: current_user }
+    return render :json => {:success => true, user: current_user.to_dto }
   end
  
   def failure
@@ -43,6 +43,21 @@ class SessionsController < Devise::SessionsController
     # or, render text: ''
     # if that's more your style
   end
+
+  def destroy
+    
+    signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
+
+    # We actually need to hardcode this as Rails default responder doesn't
+    # support returning empty response on GET request
+    respond_to do |format|
+      format.json { 
+        render json: { message: "logged out", status: 200 }
+      }
+    end
+
+  end
+
 
   def options
     head(:ok)

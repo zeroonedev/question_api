@@ -53,6 +53,13 @@ class Question < ActiveRecord::Base
 
   validates_uniqueness_of :question
 
+  validates :question, length: { maximum: 82 }
+  validates :answer,   length: { maximum: 33 }
+  validates :answer_a, length: { maximum: 33 }
+  validates :answer_b, length: { maximum: 33 }
+  validates :answer_c, length: { maximum: 33 }
+
+
   validates_with QuestionTypeValidator
   
   belongs_to :writer
@@ -98,6 +105,7 @@ class Question < ActiveRecord::Base
       s.size params[:size].present? ? params[:size] : self.all.count
       s.from params[:from] if params[:from].present?
       s.sort  { by :updated_at, "desc" } if params[:query].blank?
+      # s.sort  { by :id, params[:sort] }  if params[:sort].preset?
       s.query { string params[:query]  } if params[:query].present?
 
       s.filter :term, is_multi: params[:is_multi] if params[:is_multi].present? and 

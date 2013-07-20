@@ -248,6 +248,14 @@ def meta_data
 
 end
 
+
+def roles
+  ["Writer", "Producer", "Admin"].each do |name|
+    Role.create(name: name)
+  end
+end
+
+roles
 meta_data
 
 unless Rails.env.test?
