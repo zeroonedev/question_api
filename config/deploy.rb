@@ -35,7 +35,8 @@ namespace :deploy do
   end
 
   task :restart do
-    `kill -s SIGUSR2 $(cat /var/run/puma.pid)`
+    `kill -s SIGTERM $(cat /var/run/puma.pid)`
+    `bundle exec puma -e production -d -b unix:///var/run/question_api.sock  --pidfile /var/run/puma.pid`
   end
 
   task :uname do
