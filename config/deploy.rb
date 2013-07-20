@@ -17,7 +17,7 @@ set :normalize_asset_timestamps, false
 set :git_enable_submodules, 1
 
 after :update_code do
-  ``
+  `bundle exec rake install_front_end_deps`
 end
 
 task :start do
