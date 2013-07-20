@@ -19,26 +19,30 @@ set :use_sudo, false
 set :normalize_asset_timestamps, false
 set :git_enable_submodules, 1
 
-after :update_code do
-  `bundle exec rake install_front_end_deps`
-end
 
-task :start do
-  `bundle exec puma -e production -d -b unix:///var/run/question_api.sock  --pidfile /var/run/puma.pid`
-end
+namespace :deploy do
 
-task :stop do
-  `kill -s SIGTERM $(cat /var/run/puma.pid)`
-end
+  after :update_code do
+    `bundle exec rake install_front_end_deps`
+  end
 
-task :restart do
-  `kill -s SIGUSR2 $(cat /var/run/puma.pid)`
-end
+  task :start do
+    `bundle exec puma -e production -d -b unix:///var/run/question_api.sock  --pidfile /var/run/puma.pid`
+  end
 
-task :uname do
-  run "uname -a"
-end
+  task :stop do
+    `kill -s SIGTERM $(cat /var/run/puma.pid)`
+  end
 
-task :ruby_version do
-  run "ruby --v"
+  task :restart do
+    `kill -s SIGUSR2 $(cat /var/run/puma.pid)`
+  end
+
+  task :uname do
+    run "uname -a"
+  end
+
+  task :ruby_version do
+    run "ruby --v"
+  end
 end
