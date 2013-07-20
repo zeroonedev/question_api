@@ -23,6 +23,10 @@ task :start_search_server do
   `elasticsearch -f -D es.config=/usr/local/Cellar/elasticsearch/0.90.1/config/elasticsearch.yml`
 end
 
+task :install_front_end_deps do
+  `cd question_app; npm install && bower install`
+end
+
 task :build_front_end do
   `cd question_app; grunt build`
 end
