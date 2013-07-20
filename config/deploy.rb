@@ -2,6 +2,9 @@ set :stages, %w(development production staging)
 set :default_stage, "development"
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
+require "capistrano-rbenv"
+
+set :rbenv_ruby_version, "2.0.0-p247"
 
 set :application, "question_api"
 set :user, "www-data"
@@ -34,4 +37,8 @@ end
 
 task :uname do
   run "uname -a"
+end
+
+task :ruby_version do
+  run "ruby --v"
 end
