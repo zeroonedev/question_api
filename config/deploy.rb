@@ -29,6 +29,11 @@ after 'deploy:finalize_update', 'grunt'
 
 namespace :deploy do
 
+
+  before :update_code do
+    run ". ~/.profile"
+  end
+
   after :update_code do
     run "bundle exec rake install_front_end_deps"
   end
