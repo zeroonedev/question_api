@@ -76,11 +76,11 @@ class Question < ActiveRecord::Base
 
   mapping do
     indexes :id,               type: 'integer'
-    indexes :question,         boost: 10
-    indexes :answer,           boost: 9
-    indexes :answer_a,         boost: 9
-    indexes :answer_b,         boost: 9
-    indexes :answer_c,         boost: 9
+    indexes :question         
+    indexes :answer          
+    indexes :answer_a         
+    indexes :answer_b         
+    indexes :answer_c 
     indexes :batch_tag
     indexes :writer_id,        type: 'integer'
     indexes :category_id,      type: 'integer'
