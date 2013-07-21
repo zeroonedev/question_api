@@ -25,12 +25,7 @@ set :grunt_options, '--gruntfile question_app/Gruntfile.js'
 
 default_run_options[:pty] = true
 
-
-after "deploy" do
-  run "cd question_app"
-  run "grunt build"
-  run "bundle exec copy_front_end"
-end
+after 'deploy:finalize_update', 'grunt'
 
 namespace :deploy do
 
