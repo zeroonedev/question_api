@@ -20,10 +20,12 @@ set :normalize_asset_timestamps, false
 set :git_enable_submodules, 1
 
 
+after "deploy:update_code", "deploy:migrate"
+
 namespace :deploy do
 
   after :update_code do
-    `bundle exec rake install_front_end_deps`
+    `bundle exec rake install_front_end_deps` 
   end
 
   task :start do
