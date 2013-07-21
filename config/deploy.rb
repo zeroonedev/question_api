@@ -55,7 +55,7 @@ namespace :deploy do
 
   desc "Refresh shared node_modules symlink to current node_modules"
   task :refresh_symlink do
-    run "rm -rf #{current_path}/question_app/node_modules && ln -s #{shared_path}/node_modules #{current_path}/node_modules"
+    run "rm -rf #{current_path}/question_app/node_modules && ln -s #{shared_path}/node_modules #{current_path}/question_app/node_modules"
   end
  
   desc "Install node modules non-globally"
