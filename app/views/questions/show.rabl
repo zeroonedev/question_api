@@ -24,8 +24,12 @@ attributes :question,
            :verifier_reference_2,
            :writer_id,
            :writer_reference_1,
-           :writer_reference_2
+           :writer_reference_2,
+           :notes
 
+node(:question_type_id) do |question|
+  question.type_id
+end
 
 node(:category) do |question|
   question.category.name if question.category

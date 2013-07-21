@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    role.name == "Writer"    
+    role.name == "Admin"    
   end
 
   def writer?

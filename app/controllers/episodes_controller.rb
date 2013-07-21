@@ -1,8 +1,7 @@
 class EpisodesController < CorsController
 
   before_filter :authenticate_user!
-
-  filter_resource_access
+  before_filter :has_access
 
   def create
     @episode = Episode.generate(
@@ -31,5 +30,15 @@ class EpisodesController < CorsController
   def get_episode
     @episode ||= Episode.find(params[:id])
   end
+
+  def has_access
+    unless current_user.admin? || current_user.producer?
+      respond_to do |format|
+        format.html
+        format.json { render json: "Forbidden", status: 403 }
+      end
+    end
+  end
+
 
 end

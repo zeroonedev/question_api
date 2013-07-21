@@ -3,4 +3,9 @@
 FactoryGirl.define do
   factory :role do
   end
+
+  factory :role_writer, class: Role do
+    name "Writer"
+  end
+  
 end

@@ -4,7 +4,7 @@ class QuestionsController < CorsController
   
   before_filter :get_question, only: [:show, :edit, :update]
 
-  filter_resource_access
+  
   
   def index
     begin

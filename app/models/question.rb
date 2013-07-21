@@ -92,6 +92,10 @@ class Question < ActiveRecord::Base
     indexes :updated_at,       type: 'date'
   end    
        
+  after_save do
+    update_index
+  end
+
   def self.search(params)
     tire.search(load: true     , default_opertor: "AND", match_all: {}) do |s|
       s.size params[:size].present? ? params[:size] : self.all.count

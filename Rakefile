@@ -27,7 +27,7 @@ task :install_front_end_deps do
 end
 
 task :build_front_end do
-  `cd question_app; node_modules/.bin/grunt build`
+  `cd question_app; grunt build`
 end
 
 task :copy_front_end do
