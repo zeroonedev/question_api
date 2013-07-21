@@ -21,6 +21,11 @@ set :git_enable_submodules, 1
 
 default_run_options[:pty] = true
 
+
+after "deploy" do
+  run "bundle exec rake build_front_end && bundle exec copy_front_end"
+end
+
 namespace :deploy do
 
   after :update_code do
@@ -28,7 +33,7 @@ namespace :deploy do
   end
 
   task :start do
-    run "#{sudo} bundle exec puma -e production -d -b unix:///var/run/question_api.sock; --pidfile /var/run/puma.pid"
+    run "#{sudo} bundle exec puma -e production -d -b unix:///var/run/question_api.sock --pidfile /var/run/puma.pid"
   end
 
   task :stop do
