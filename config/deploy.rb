@@ -32,7 +32,7 @@ default_run_options[:pty] = true
     task :default, :roles => :app, :except => { :no_release => true } do
       tasks = Array(grunt_tasks)
       tasks.each do |task|
-        try_sudo "cd #{latest_release}/question_app && node_modules/.bin/grunt #{grunt_options} #{task}"
+        try_sudo "cd #{latest_release}/question_app && grunt #{grunt_options} #{task}"
       end
     end
   end
