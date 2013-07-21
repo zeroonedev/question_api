@@ -20,8 +20,8 @@ set :use_sudo, false
 set :normalize_asset_timestamps, false
 set :git_enable_submodules, 1
 
-# set :grunt_tasks, 'build'
-# set :grunt_options, '--gruntfile Gruntfile.js'
+set :grunt_tasks, 'build'
+set :grunt_options, '--gruntfile Gruntfile.js'
 
 default_run_options[:pty] = true
 
@@ -75,7 +75,7 @@ namespace :deploy do
   end
 
   desc "Install bower modules non-globally"
-  task :npm_install do
+  task :bower_install do
     run "cd #{current_path}/question_app && bower install"
   end
 
@@ -83,7 +83,7 @@ namespace :deploy do
     run "cd #{current_path}/question_app; which grunt"
   end
 
-  before "deploy:finalize_update", "deploy:refresh_symlink", "deploy:npm_install"
-  after "deploy:npm_install", "deploy:install_grunt"
+  before "deploy:finalize_update", "deploy:refresh_symlink", "deploy:npm_install", "deploy:bower_install"
+  # after "deploy:npm_install", "deploy:install_grunt"
   after 'deploy:finalize_update', 'grunt_sub'
 end
