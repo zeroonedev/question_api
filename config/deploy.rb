@@ -25,17 +25,12 @@ set :grunt_options, '--gruntfile question_app/Gruntfile.js'
 
 default_run_options[:pty] = true
 
-after 'deploy:finalize_update', 'grunt'
 
 namespace :deploy do
 
 
   before :update_code do
     run ". ~/.profile"
-  end
-
-  after "bundle:install" do
-    run "bundle exec rake install_front_end_deps"
   end
 
   task :start do
@@ -58,4 +53,21 @@ namespace :deploy do
     run "ruby --v"
   end
 
+  desc "Refresh shared node_modules symlink to current node_modules"
+  task :refresh_symlink do
+    run "rm -rf #{current_path}/question_app/node_modules && ln -s #{shared_path}/node_modules #{current_path}/node_modules"
+  end
+ 
+  desc "Install node modules non-globally"
+  task :npm_install do
+    run "cd #{current_path}/question_app && npm install"
+  end
+
+    desc "Install bower modules non-globally"
+  task :npm_install do
+    run "cd #{current_path}/question_app && bower install"
+  end
+
+  after "deploy:update_code", "deploy:refresh_symlink", "deploy:npm_install"
+  after 'deploy:finalize_update', 'grunt'
 end
