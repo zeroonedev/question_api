@@ -68,6 +68,6 @@ namespace :deploy do
     run "cd #{current_path}/question_app && bower install"
   end
 
-  after "deploy:update_code", "deploy:refresh_symlink", "deploy:npm_install"
+  before "deploy:finalize_update", "deploy:refresh_symlink", "deploy:npm_install"
   after 'deploy:finalize_update', 'grunt'
 end
