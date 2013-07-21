@@ -34,7 +34,7 @@ namespace :deploy do
     run ". ~/.profile"
   end
 
-  after :update_code do
+  after "bundle:install" do
     run "bundle exec rake install_front_end_deps"
   end
 
