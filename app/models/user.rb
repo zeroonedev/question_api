@@ -33,4 +33,8 @@ class User < ActiveRecord::Base
     role.name == "Writer"
   end
 
+  def roles
+    [role.name.to_sym]
+  end
+
 end

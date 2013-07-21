@@ -48,11 +48,12 @@ class SessionsController < Devise::SessionsController
     
     signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
 
+    p session
     # We actually need to hardcode this as Rails default responder doesn't
     # support returning empty response on GET request
     respond_to do |format|
       format.json { 
-        render json: { message: "logged out", status: 200 }
+        render json: { user: {}, message: "logged out", status: 200 }
       }
     end
 

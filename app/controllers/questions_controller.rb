@@ -1,10 +1,11 @@
 class QuestionsController < CorsController
 
   before_filter :authenticate_user!
+  
   before_filter :get_question, only: [:show, :edit, :update]
 
-  authorize_resource
-
+  filter_resource_access
+  
   def index
     begin
       @questions = Question.search(params)

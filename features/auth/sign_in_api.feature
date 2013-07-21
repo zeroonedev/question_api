@@ -50,4 +50,4 @@ Feature: Sign In
         { "user":{ "email": "adamj@example.com" , "password": "password123" }}
         """
       And   I send a GET request to "/episodes"
-      Then  the response status should be "401"
+      Then  the response status should be "403"

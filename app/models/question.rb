@@ -74,14 +74,6 @@ class Question < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-  after_save do
-    if deleted_at.nil?
-      self.index.store self
-    else
-      self.index.remove self
-    end
-  end
-
   mapping do
     indexes :id,               type: 'integer'
     indexes :question,         boost: 10

@@ -149,8 +149,6 @@ def import_questions
         difficulty_name = difficulty_map(difficulty_name)
         difficulty = Difficulty.find_or_create_by_name(difficulty_name)
 
-        q.attributes[:is_multi] = is_multi
-
         question = Question.new(q.attributes)
 
         question.verified = yes_no_map(q.verified)
@@ -255,7 +253,40 @@ def roles
   end
 end
 
+def users
+  [
+    {
+      name: "Moog",
+      email: "impurist@gmail.com",
+      role: "Admin",
+      password: "password123",
+      password_confirmation: "password123"
+    },
+    {
+      name: "Adam Jones",
+      email: "adamj@example.com",
+      role: "Writer",
+      password: "password123",
+      password_confirmation: "password123"
+    },
+    {
+      name: "James Pages",
+      email: "jamesp@example.com",
+      role: "Producer",
+      password: "password123",
+      password_confirmation: "password123"
+    }
+  ].each do |user_attr|
+    role_name = user_attr.delete(:role)
+    user = User.new(user_attr)
+    user.role = Role.find_by_name(role_name)
+    user.save
+  end
+end
+
+
 roles
+users
 meta_data
 
 unless Rails.env.test?

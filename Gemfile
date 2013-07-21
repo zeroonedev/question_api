@@ -12,7 +12,8 @@ gem 'conformist'
 gem 'tire'
 gem 'rails_admin'
 gem 'puma', '~> 2.1.0'
-gem "cancan"
+# gem "cancan"
+gem 'declarative_authorization'
 gem 'capistrano'
 gem 'compass'
 gem 'capistrano-rbenv'

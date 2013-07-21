@@ -33,3 +33,4 @@ end
 task :copy_front_end do
   `cp -R question_app/dist/* public/ && cp question_app/dist/index.html app/views/layouts/client.html`
 end
+
