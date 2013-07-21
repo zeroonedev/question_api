@@ -19,6 +19,7 @@ set :use_sudo, false
 set :normalize_asset_timestamps, false
 set :git_enable_submodules, 1
 
+default_run_options[:pty] = true
 
 namespace :deploy do
 
