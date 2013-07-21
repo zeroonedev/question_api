@@ -27,16 +27,15 @@ namespace :deploy do
   end
 
   task :start do
-    `bundle exec puma -e production -d -b unix:///var/run/question_api.sock  --pidfile /var/run/puma.pid`
+    `bundle exec puma -e production -d -b unix:///tmp/question_api.sock  --pidfile /tmp/puma.pid`
   end
 
   task :stop do
-    `kill -s SIGTERM $(cat /var/run/puma.pid)`
+    `kill -s SIGTERM $(cat /tmp/puma.pid)`
   end
 
   task :restart do
-    `kill -s SIGTERM $(cat /var/run/puma.pid)`
-    `bundle exec puma -e production -d -b unix:///var/run/question_api.sock  --pidfile /var/run/puma.pid`
+    `kill -s SIGUSR2 $(cat /tmp/puma.pid)`
   end
 
   task :uname do
