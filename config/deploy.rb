@@ -23,7 +23,8 @@ default_run_options[:pty] = true
 
 
 after "deploy" do
-  run "bundle exec rake build_front_end && bundle exec copy_front_end"
+  run "bundle exec rake build_front_end"
+  run "bundle exec copy_front_end"
 end
 
 namespace :deploy do
