@@ -80,7 +80,7 @@ namespace :deploy do
   end
 
   task :install_grunt do
-    run "npm install grunt --save-dev"
+    run "cd #{current_path}/question_app; npm install grunt --save-dev"
   end
 
   before "deploy:finalize_update", "deploy:refresh_symlink", "deploy:npm_install"
