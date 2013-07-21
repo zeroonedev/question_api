@@ -79,7 +79,11 @@ namespace :deploy do
     run "cd #{current_path}/question_app && bower install"
   end
 
+  task :set_module_path do
+    run "export PATH=$PATH:#{current_path}/question_app/node_modules/.bin"
+  end
+
   before "deploy:finalize_update", "deploy:refresh_symlink", "deploy:npm_install"
-  # after "deploy:npm_install", "deploy:set_module_path"
+  after "deploy:npm_install", "deploy:set_module_path"
   after 'deploy:finalize_update', 'grunt_sub'
 end
