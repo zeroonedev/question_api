@@ -23,7 +23,7 @@ task :start_search_server do
 end
 
 task :install_front_end_deps do
-  `cd question_app; npm install && bower install`
+  `cd question_app; npm install && node_modules/.bin/bower bower install`
 end
 
 task :build_front_end do
