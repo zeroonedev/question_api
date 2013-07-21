@@ -80,7 +80,7 @@ namespace :deploy do
   end
 
   task :set_module_path do
-    run "export PATH=$PATH:#{current_path}/question_app/node_modules/.bin"
+    run "export PATH=$PATH:#{current_path}/question_app/node_modules/.bin; which grunt"
   end
 
   before "deploy:finalize_update", "deploy:refresh_symlink", "deploy:npm_install"
