@@ -50,6 +50,24 @@ RailsAdmin.config do |config|
   # Now you probably need to tour the wiki a bit: https://github.com/sferik/rails_admin/wiki
   # Anyway, here is how RailsAdmin saw your application's models when you ran the initializer:
 
+config.model 'User' do
+  edit do
+    field :name 
+    field :email
+    field :password
+    field :password_confirmation
+    field :role, :belongs_to_association
+  end
+end
+
+config.model 'Role' do
+  edit do
+    field :name 
+    field :users, :has_many_association
+  end
+end
+
+
 
 
   ###  Category  ###
@@ -93,6 +111,8 @@ RailsAdmin.config do |config|
   #     # you can override a cross-section field configuration in any section with the same syntax `configure :field_name do ... end`
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
+
+
 
 
   ###  Difficulty  ###

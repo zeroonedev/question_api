@@ -18,6 +18,8 @@ gem 'capistrano'
 gem 'compass'
 gem 'capistrano-rbenv'
 
+gem 'dumper'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :test, :development do
