@@ -32,7 +32,7 @@ default_run_options[:pty] = true
     task :default, :roles => :app, :except => { :no_release => true } do
       tasks = Array(grunt_tasks)
       tasks.each do |task|
-        try_sudo "cd #{latest_release}/question_app && grunt #{grunt_options} #{task}"
+        try_sudo "cd #{latest_release}/question_app && node_modules/.bin/grunt #{grunt_options} #{task}"
       end
     end
   end
@@ -74,11 +74,12 @@ namespace :deploy do
     run "cd #{current_path}/question_app && npm install"
   end
 
-    desc "Install bower modules non-globally"
+  desc "Install bower modules non-globally"
   task :npm_install do
     run "cd #{current_path}/question_app && bower install"
   end
 
   before "deploy:finalize_update", "deploy:refresh_symlink", "deploy:npm_install"
+  after "deploy:npm_install", "deploy:set_module_path"
   after 'deploy:finalize_update', 'grunt_sub'
 end
