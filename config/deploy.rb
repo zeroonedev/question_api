@@ -21,7 +21,7 @@ set :normalize_asset_timestamps, false
 set :git_enable_submodules, 1
 
 set :grunt_tasks, 'build'
-# set :grunt_options, '--gruntfile /Gruntfile.js'
+set :grunt_options, '--gruntfile Gruntfile.js'
 
 default_run_options[:pty] = true
 
