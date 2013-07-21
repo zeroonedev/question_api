@@ -34,9 +34,3 @@ end
 task :copy_front_end do
   `cp -R question_app/dist/* public/ && cp question_app/dist/index.html app/views/layouts/client.html`
 end
-
-task :clean_db => :environment do
-  return if Rails.env.production?
-  DatabaseCleaner.strategy = :truncation
-  DatabaseCleaner.clean
-end
