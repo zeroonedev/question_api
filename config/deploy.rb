@@ -23,19 +23,19 @@ set :git_enable_submodules, 1
 namespace :deploy do
 
   after :update_code do
-    `bundle exec rake install_front_end_deps`
+    run "bundle exec rake install_front_end_deps"
   end
 
   task :start do
-    `sudo bundle exec puma -e production -d -b unix:///var/run/question_api.sock; --pidfile /var/run/puma.pid`
+    run "#{sudo} bundle exec puma -e production -d -b unix:///var/run/question_api.sock; --pidfile /var/run/puma.pid"
   end
 
   task :stop do
-    `sudo kill -s SIGTERM $(cat /var/run/puma.pid)`
+    sudo "#{sudo} kill -s SIGTERM $(cat /var/run/puma.pid)"
   end
 
   task :restart do
-    `sudo kill -s SIGUSR2 $(cat /var/run/puma.pid)`
+    sudo "#{sudo} kill -s SIGUSR2 $(cat /var/run/puma.pid)"
   end
 
   task :uname do
