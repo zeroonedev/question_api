@@ -19,6 +19,7 @@ gem 'compass'
 gem 'capistrano-rbenv'
 gem 'dumper'
 gem 'capistrano-grunt', git: 'https://github.com/roots/capistrano-grunt.git'
+gem 'capistrano-npm', git: 'https://github.com/roots/capistrano-npm.git'
 
 # Gems used only for assets and not required
 # in production environments by default.

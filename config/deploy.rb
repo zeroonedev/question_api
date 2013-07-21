@@ -64,15 +64,15 @@ namespace :deploy do
     run "ruby --v"
   end
 
-  desc "Refresh shared node_modules symlink to current node_modules"
-  task :refresh_symlink do
-    run "rm -rf #{current_path}/question_app/node_modules && ln -s #{shared_path}/node_modules #{current_path}/question_app/node_modules"
-  end
+  # desc "Refresh shared node_modules symlink to current node_modules"
+  # task :refresh_symlink do
+  #   run "rm -rf #{current_path}/question_app/node_modules && ln -s #{shared_path}/node_modules #{current_path}/question_app/node_modules"
+  # end
  
-  desc "Install node modules non-globally"
-  task :npm_install do
-    run "cd #{current_path}/question_app && npm install"
-  end
+  # desc "Install node modules non-globally"
+  # task :npm_install do
+  #   run "cd #{current_path}/question_app && npm install"
+  # end
 
   desc "Install bower modules non-globally"
   task :bower_install do
@@ -83,7 +83,7 @@ namespace :deploy do
     run "cd #{current_path}/question_app; which grunt"
   end
 
-  before "deploy:finalize_update", "deploy:refresh_symlink", "deploy:npm_install", "deploy:bower_install"
+  before "deploy:finalize_update", "npm:install", "deploy:bower_install"
   # after "deploy:npm_install", "deploy:install_grunt"
   after 'deploy:finalize_update', 'grunt_sub'
 end

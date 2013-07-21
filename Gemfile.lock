@@ -5,6 +5,13 @@ GIT
     capistrano-grunt (0.0.1)
       capistrano (>= 2.5.5)
 
+GIT
+  remote: https://github.com/roots/capistrano-npm.git
+  revision: f4224f5bc8291086c952319ce27bbd35860f7f08
+  specs:
+    capistrano-npm (0.0.1)
+      capistrano (>= 2.5.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -300,6 +307,7 @@ PLATFORMS
 DEPENDENCIES
   capistrano
   capistrano-grunt!
+  capistrano-npm!
   capistrano-rbenv
   compass
   conformist
