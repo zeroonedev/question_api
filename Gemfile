@@ -17,7 +17,7 @@ gem 'declarative_authorization'
 gem 'capistrano'
 gem 'compass'
 gem 'capistrano-rbenv'
-
+gem 'capistrano-grunt', git: 'https://github.com/roots/capistrano-grunt.git'
 gem 'dumper'
 
 # Gems used only for assets and not required

@@ -3,6 +3,7 @@ set :default_stage, "development"
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
 require "capistrano-rbenv"
+require 'capistrano/grunt'
 
 set :rbenv_ruby_version, "2.0.0-p247"
 
@@ -18,6 +19,9 @@ set :rails_env, 'production'
 set :use_sudo, false
 set :normalize_asset_timestamps, false
 set :git_enable_submodules, 1
+
+set :grunt_tasks, 'build'
+set :grunt_options, '--gruntfile question_app/Gruntfile.js'
 
 default_run_options[:pty] = true
 
@@ -53,4 +57,5 @@ namespace :deploy do
   task :ruby_version do
     run "ruby --v"
   end
+
 end

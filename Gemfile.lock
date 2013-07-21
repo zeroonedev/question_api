@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/roots/capistrano-grunt.git
+  revision: 46cead494cbc8027f52a81033c76b17f4b93f323
+  specs:
+    capistrano-grunt (0.0.1)
+      capistrano (>= 2.5.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -292,6 +299,7 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano
+  capistrano-grunt!
   capistrano-rbenv
   compass
   conformist
