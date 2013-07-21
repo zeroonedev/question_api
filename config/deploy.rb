@@ -26,6 +26,17 @@ set :grunt_options, '--gruntfile question_app/Gruntfile.js'
 default_run_options[:pty] = true
 
 
+
+  namespace :grunt_sub do
+    desc 'Runs the Grunt tasks or the default task if none are specified in grunt_tasks.'
+    task :default, :roles => :app, :except => { :no_release => true } do
+      tasks = Array(grunt_tasks)
+      tasks.each do |task|
+        try_sudo "cd #{latest_release}/question_app && grunt #{grunt_options} #{task}"
+      end
+    end
+  end
+
 namespace :deploy do
 
 
@@ -69,5 +80,5 @@ namespace :deploy do
   end
 
   before "deploy:finalize_update", "deploy:refresh_symlink", "deploy:npm_install"
-  after 'deploy:finalize_update', 'grunt'
+  after 'deploy:finalize_update', 'grunt_sub'
 end
