@@ -80,6 +80,6 @@ namespace :deploy do
   end
 
   before "deploy:finalize_update", "deploy:refresh_symlink", "deploy:npm_install"
-  after "deploy:npm_install", "deploy:set_module_path"
+  # after "deploy:npm_install", "deploy:set_module_path"
   after 'deploy:finalize_update', 'grunt_sub'
 end
