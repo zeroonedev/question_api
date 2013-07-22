@@ -3,7 +3,6 @@ set :default_stage, "development"
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
 require "capistrano-rbenv"
-require 'capistrano/grunt'
 
 set :rbenv_ruby_version, "2.0.0-p247"
 
@@ -34,6 +33,13 @@ default_run_options[:pty] = true
       tasks.each do |task|
         try_sudo "cd #{latest_release}/question_app && grunt #{grunt_options} #{task}"
       end
+    end
+  end
+
+namespace :npm_sub do
+    desc 'Runs npm install.'
+    task :install, :roles => :app, :except => { :no_release => true } do
+      try_sudo "cd #{latest_release}/question_app && #{npm_path} #{npm_options} install"
     end
   end
 
@@ -83,7 +89,7 @@ namespace :deploy do
     run "cd #{current_path}/question_app; which grunt"
   end
 
-  before "deploy:finalize_update", "npm:install", "deploy:bower_install"
+  before "deploy:finalize_update", "npm_sub:install", "deploy:bower_install"
   # after "deploy:npm_install", "deploy:install_grunt"
   after 'deploy:finalize_update', 'grunt_sub'
 end
