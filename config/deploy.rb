@@ -19,8 +19,8 @@ set :use_sudo, false
 set :normalize_asset_timestamps, false
 set :git_enable_submodules, 1
 
-set :grunt_tasks, 'build'
-set :grunt_options, '--gruntfile Gruntfile.js'
+# set :grunt_tasks, 'build'
+# set :grunt_options, '--gruntfile Gruntfile.js'
 
 set :npm_options, ''
 
@@ -93,5 +93,5 @@ namespace :deploy do
 
   before "deploy:finalize_update", "npm_sub:install", "deploy:bower_install"
   # after "deploy:npm_install", "deploy:install_grunt"
-  after 'deploy:finalize_update', 'grunt_sub'
+  # after 'deploy:finalize_update', 'grunt_sub'
 end
