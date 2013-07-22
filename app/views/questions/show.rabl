@@ -25,11 +25,9 @@ attributes :question,
            :writer_id,
            :writer_reference_1,
            :writer_reference_2,
-           :notes
+           :notes,
+           :question_type_id
 
-node(:question_type_id) do |question|
-  question.type_id
-end
 
 node(:category) do |question|
   question.category.name if question.category
