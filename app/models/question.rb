@@ -39,7 +39,7 @@ class Question < ActiveRecord::Base
                   :answer_b, 
                   :answer_c,
                   :correct_answer,
-                  :type_id,
+                  :question_type_id,
                   :notes
 
   validates_presence_of :question,
@@ -49,7 +49,7 @@ class Question < ActiveRecord::Base
                         :writer_id,
                         :writer_reference_1,
                         :writer_reference_2,
-                        :type_id
+                        :question_type_id
 
   validates_uniqueness_of :question
 
@@ -66,7 +66,7 @@ class Question < ActiveRecord::Base
   belongs_to :producer
   belongs_to :category
   belongs_to :difficulty
-  belongs_to :type, class_name: QuestionType, :foreign_key => "type_id"
+  belongs_to :question_type
 
 
   scope :verified, -> { where(verified: true) }
@@ -84,7 +84,7 @@ class Question < ActiveRecord::Base
     indexes :batch_tag
     indexes :writer_id,        type: 'integer'
     indexes :category_id,      type: 'integer'
-    indexes :type_id,          type: 'integer'
+    indexes :question_type_id, type: 'integer'
     indexes :difficulty_id,    type: 'integer'
     indexes :is_multi,         type: 'boolean'
     indexes :verified,         type: 'boolean'
@@ -134,9 +134,9 @@ class Question < ActiveRecord::Base
         terms :used
       end
 
-      s.filter :term, type_id: params[:type_id] if params[:type_id].present?
+      s.filter :term, question_type_id: params[:question_type_id] if params[:question_type_id].present?
       s.facet "question_type" do
-        terms :type_id
+        terms :question_type_id
       end
 
     end
@@ -152,7 +152,7 @@ class Question < ActiveRecord::Base
   end
 
   def is_multi
-    type == QuestionType.multi
+    question_type == QuestionType.multi
   end
 
 end

@@ -26,8 +26,6 @@ set :npm_options, ''
 
 default_run_options[:pty] = true
 
-
-
   namespace :grunt_sub do
     desc 'Runs the Grunt tasks or the default task if none are specified in grunt_tasks.'
     task :default, :roles => :app, :except => { :no_release => true } do
@@ -91,7 +89,8 @@ namespace :deploy do
     run "cd #{current_path}/question_app; which grunt"
   end
 
-  before "deploy:finalize_update", "npm_sub:install", "deploy:bower_install"
+
+  before "deploy:finalize_update", "deploy:migrate", "npm_sub:install", "deploy:bower_install"
   # after "deploy:npm_install", "deploy:install_grunt"
   # after 'deploy:finalize_update', 'grunt_sub'
 end

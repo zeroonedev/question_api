@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130716080448) do
+ActiveRecord::Schema.define(:version => 20130722010424) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(:version => 20130716080448) do
     t.integer  "category_id"
     t.integer  "producer_id"
     t.integer  "difficulty_id"
-    t.integer  "type_id"
+    t.integer  "question_type_id"
     t.integer  "round_id"
     t.integer  "spare_id"
     t.boolean  "verified"
