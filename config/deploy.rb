@@ -22,6 +22,8 @@ set :git_enable_submodules, 1
 set :grunt_tasks, 'build'
 set :grunt_options, '--gruntfile Gruntfile.js'
 
+set :npm_options, ''
+
 default_run_options[:pty] = true
 
 
