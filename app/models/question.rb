@@ -96,6 +96,10 @@ class Question < ActiveRecord::Base
     update_index
   end
 
+  after_destroy do
+    self.index.remove self
+  end
+
   def self.search(params)
     tire.search(load: true     , default_opertor: "AND", match_all: {}) do |s|
       s.size params[:size].present? ? params[:size] : self.all.count
