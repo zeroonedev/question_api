@@ -16,3 +16,5 @@
 /public
 /app/views/layouts/client.html
 .idea/
+
+/.DS_Store
