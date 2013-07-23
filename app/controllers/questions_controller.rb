@@ -1,3 +1,5 @@
+ Tire.configure { logger 'elasticsearch.log', :level => 'debug' }
+
 class QuestionsController < CorsController
 
   before_filter :authenticate_user!
@@ -9,6 +11,7 @@ class QuestionsController < CorsController
   def index
     begin
       @questions = Question.search(params)
+      p @questions.map(&:id)
       @total =  @questions.total
     rescue Exception => e
       @notification = e

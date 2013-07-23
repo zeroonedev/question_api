@@ -14,9 +14,10 @@ class FormMetadataFactory
       ],
       used_options: [
         all_value_option,
-        { name: "Used",     value: true },
-        { name: "Not used", value: false },
-      ]
+        { name: "Yes",     value: true },
+        { name: "No", value: false },
+      ],
+      batch_tags: Question.batch_tags
     }
   end
 

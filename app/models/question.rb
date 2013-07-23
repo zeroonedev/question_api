@@ -74,13 +74,13 @@ class Question < ActiveRecord::Base
   include Tire::Model::Callbacks
 
   mapping do
-    indexes :id,               type: 'integer'
+    indexes :id,               type: 'integer', index: 'not_analyzed'
     indexes :question         
     indexes :answer          
     indexes :answer_a         
     indexes :answer_b         
     indexes :answer_c 
-    indexes :batch_tag
+    indexes :batch_tag,        type: 'string', index: 'not_analyzed'
     indexes :writer_id,        type: 'integer'
     indexes :category_id,      type: 'integer'
     indexes :question_type_id, type: 'integer'
@@ -100,10 +100,10 @@ class Question < ActiveRecord::Base
   end
 
   def self.search(params)
-    tire.search(load: true     , default_opertor: "AND", match_all: {}) do |s|
+    tire.search(load: true, default_opertor: "AND", match_all: {}) do |s|
       s.size params[:size].present? ? params[:size] : self.all.count
       s.from params[:from] if params[:from].present?
-      s.sort  { by :updated_at, "desc" } if params[:query].blank?
+      # s.sort  { by :updated_at, "desc" } if params[:query].blank?
       # s.sort  { by :id, params[:sort] }  if params[:sort].preset?
       s.query { string params[:query]  } if params[:query].present?
 
@@ -132,13 +132,23 @@ class Question < ActiveRecord::Base
         terms :used
       end
 
+      s.filter :term, batch_tag: params[:batch_tag] if params[:batch_tag].present?
+      s.facet "batch_tag" do
+        terms :batch_tag
+      end
+
       s.filter :term, question_type_id: params[:question_type_id] if params[:question_type_id].present?
       s.facet "question_type" do
         terms :question_type_id
       end
-
     end
+
   end
+
+  def self.batch_tags
+    verified.map{|q| { name: q.batch_tag, id: q.batch_tag } }.uniq
+  end
+
 
   #TODO make this less crazy
   def sanitize_errors

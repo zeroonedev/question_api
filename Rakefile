@@ -23,6 +23,6 @@ task :start_search_server do
 end
 
 task :copyfe do
-  ("cp -R question_app/dist/* public/ && cp question_app/dist/index.html app/views/layouts/client.html")
+  ("cp -r question_app/dist/* public/ && cp question_app/dist/index.html app/views/layouts/client.html")
 end
 

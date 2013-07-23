@@ -14,7 +14,7 @@ class QuestionProvider
   def questions_for(params)
     limit = params[:limit]
     question_class = params[:spare] ? SpareQuestion : Question
-    questions = question_class.where(type_id: question_type(params[:type])).where("id NOT IN (?)", allocated_question_ids).limit(limit)
+    questions = question_class.where(question_type_id: question_type(params[:type])).where("id NOT IN (?)", allocated_question_ids).limit(limit)
     raise "hell: #{limit} != #{questions.count}" if limit != questions.count
     allocate(questions)
     questions
