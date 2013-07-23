@@ -2,7 +2,6 @@
 class QuestionTypeValidator < ActiveModel::Validator
 
   def validate(record)
-    p record
     if record.is_multi
       record.errors.add :answer_a, "can't be blank" if record.answer_a.blank? 
       record.errors.add :answer_b, "can't be blank" if record.answer_b.blank? 
@@ -107,11 +106,6 @@ class Question < ActiveRecord::Base
       s.sort  { by :updated_at, "desc" } if params[:query].blank?
       # s.sort  { by :id, params[:sort] }  if params[:sort].preset?
       s.query { string params[:query]  } if params[:query].present?
-
-      s.filter :term, is_multi: params[:is_multi] if params[:is_multi].present? and 
-      s.facet "is_multi" do
-        terms :is_multi
-      end
 
       s.filter :term, writer_id: params[:writer_id] if params[:writer_id].present?
       s.facet "writers" do

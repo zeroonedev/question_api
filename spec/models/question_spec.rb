@@ -15,7 +15,6 @@ describe Question do
       "writer_id"=>"3",
       "writer_reference_1"=>"writer reference one", 
       "writer_reference_2"=>"writer reference two",
-      "is_multi" => false
     }
 
     @question = Question.new(
