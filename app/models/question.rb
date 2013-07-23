@@ -92,11 +92,11 @@ class Question < ActiveRecord::Base
   end    
        
   after_save do
-    update_index
+    tire.update_index
   end
 
   after_destroy do
-    self.index.remove self
+    tire.update_index
   end
 
   def self.search(params)
