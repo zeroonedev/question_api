@@ -22,14 +22,6 @@ task :start_search_server do
   run("elasticsearch -f -D es.config=/usr/local/Cellar/elasticsearch/0.90.1/config/elasticsearch.yml")
 end
 
-task :depsfe do
-  run("cd question_app; npm install && node_modules/.bin/bower bower install")
-end
-
-task :buildfe do
-  run("cd question_app; grunt build")
-end
-
 task :copyfe do
   ("cp -R question_app/dist/* public/ && cp question_app/dist/index.html app/views/layouts/client.html")
 end
