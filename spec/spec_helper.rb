@@ -85,12 +85,12 @@ def import_questions
 
   csv_importer = {
     single_question_csv:  {
-      file: CSV.open("db/test_question_data/real-data/QA_question_final.csv"),
+      file: CSV.open("db/test_question_data/real-data/QA_questions_final.csv"),
       schema: single_choice_schema,
       is_multi: false
     },
     multi_choice_csv: { 
-      file: CSV.open("db/test_question_data/real-data/MC_question_final.csv"),
+      file: CSV.open("db/test_question_data/real-data/MC_questions_final.csv"),
       schema: multi_choice_schema,
       is_multi: true
     }
@@ -117,7 +117,7 @@ def import_questions
         difficulty = Difficulty.find_or_create_by_name(difficulty_name)
 
         question = Question.new(q.attributes)
-        question.type = question_type
+        question.question_type = question_type
 
         question.writer = writer
         question.producer = producer

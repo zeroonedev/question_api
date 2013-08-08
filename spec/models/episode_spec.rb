@@ -113,18 +113,12 @@ describe Episode do
     end
 
     describe "View Structure" do
-
       it "should render hash or json structure" do
-        
         @episode
-
       end
     end
 
-######
-
     describe "#populate" do
-
       describe "populate episode with questions" do
 
         before(:each) do
@@ -133,12 +127,10 @@ describe Episode do
           @episode.populate(@provider)
         end
 
+        # it "should description" do
+        #   pp @episode.pretty_print
+        # end
 
-        it "should description" do
-          
-          pp @episode.pretty_print
-
-        end
         describe "Round 1" do
 
           before(:each) do
@@ -146,22 +138,17 @@ describe Episode do
           end
 
           it "should have 10 questions" do
-            expect(@round.questions.count).to eq 10
+            expect(@round.questions.count).to eq @round.round_type.number_of_questions
           end
 
           it "should have 3 spares" do
-            expect(@round.spares.count).to eq 3
+            expect(@round.spares.count).to eq @round.round_type.number_of_spares
           end
-
         end
-
       end
 
-
       describe "questions are unique within and episode" do
-
         it "should fail to add same to episode" do
-          
         end
       end
 

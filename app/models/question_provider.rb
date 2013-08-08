@@ -29,6 +29,4 @@ class QuestionProvider
   def question_type type_param
     QuestionType.find_by_name(type_param)
   end
-
-
 end

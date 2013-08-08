@@ -6,7 +6,7 @@ class Episode < ActiveRecord::Base
                         :record_date
 
   has_many :rounds
-  
+
   ROUND_METADATA = [
     {
       name: "Round 1",
