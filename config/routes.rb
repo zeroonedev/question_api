@@ -19,6 +19,6 @@ QuestionServer::Application.routes.draw do
   match 'form_metadatum.json' => 'cors#options', constraints: { method: 'OPTIONS' }
   match 'form_metadatum/:id.json' => 'cors#options', constraints: { method: 'OPTIONS' }
 
-  root :to => "client#index" 
+  root :to => "client#index"
 
 end

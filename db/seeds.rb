@@ -153,7 +153,7 @@ def import_questions
 
         question.verified = yes_no_map(q.verified)
         
-        question.type = question_type
+        question.question_type = question_type
         question.writer = writer
         question.producer = producer
         question.category = category
@@ -282,6 +282,8 @@ def users
     user.role = Role.find_by_name(role_name)
     user.save
   end
+
+	Admin.create!(email: 'lyndon.maydwell@silverpond.com.au', password: 'password')
 end
 
 

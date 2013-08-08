@@ -23,6 +23,7 @@ task :start_search_server do
 end
 
 task :copyfe do
-  ("cp -r question_app/dist/* public/ && cp question_app/dist/index.html app/views/layouts/client.html")
+	`mkdir -p public`
+  `cp -r question_app/dist/* public/ && cp question_app/dist/index.html app/views/layouts/client.html`
 end
 
