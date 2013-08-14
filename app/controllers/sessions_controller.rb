@@ -4,7 +4,6 @@ class SessionsController < Devise::SessionsController
   before_filter :allow_cors_requests
   after_filter  :set_csrf_cookie_for_ng
 
-
   def new
     # self.resource = build_resource(nil, :unsafe => true)
     # clean_up_passwords(resource)
@@ -16,14 +15,14 @@ class SessionsController < Devise::SessionsController
     resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
     sign_in_and_redirect(resource_name, resource)
   end
- 
+
   def sign_in_and_redirect(resource_or_scope, resource=nil)
     scope = Devise::Mapping.find_scope!(resource_or_scope)
     resource ||= resource_or_scope
     sign_in(scope, resource) unless warden.user(scope) == resource
     return render :json => {:success => true, user: current_user.to_dto }
   end
- 
+
   def failure
     return render :json => {:success => false, :errors => ["Login failed."]}
   end
@@ -45,18 +44,15 @@ class SessionsController < Devise::SessionsController
   end
 
   def destroy
-    
     signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
 
-    p session
     # We actually need to hardcode this as Rails default responder doesn't
     # support returning empty response on GET request
     respond_to do |format|
-      format.json { 
+      format.json {
         render json: { user: {}, message: "logged out", status: 200 }
       }
     end
-
   end
 
 

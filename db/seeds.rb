@@ -283,7 +283,7 @@ def users
     user.save
   end
 
-	Admin.create!(email: 'lyndon.maydwell@silverpond.com.au', password: 'password')
+  Admin.create!(email: 'lyndon.maydwell@silverpond.com.au', password: 'password')
 end
 
 
