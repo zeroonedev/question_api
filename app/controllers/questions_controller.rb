@@ -1,6 +1,6 @@
  Tire.configure { logger 'elasticsearch.log', :level => 'debug' }
 
-class QuestionsController < CorsController
+class QuestionsController < ApplicationController
 
   before_filter :authenticate_user!
   

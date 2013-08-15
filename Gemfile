@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
+# gem 'rack-cors', :require => 'rack/cors'
+# gem 'rack-jsonp-middleware'
+
 gem 'rails', '3.2.13'
-gem 'rack-cors', :require => 'rack/cors'
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
 gem 'rabl'
@@ -12,7 +12,6 @@ gem 'conformist'
 gem 'tire'
 gem 'rails_admin'
 gem 'puma', '~> 2.1.0'
-# gem "cancan"
 gem 'declarative_authorization'
 gem 'capistrano'
 gem 'compass'
@@ -20,9 +19,8 @@ gem 'capistrano-rbenv'
 gem 'dumper'
 gem 'capistrano-grunt', git: 'https://github.com/roots/capistrano-grunt.git'
 gem 'capistrano-npm', git: 'https://github.com/roots/capistrano-npm.git'
+gem "devise"
 
-# Gems used only for assets and not required
-# in production environments by default.
 group :test, :development do
   gem 'rspec-rails'
   gem 'json_spec'
@@ -36,25 +34,4 @@ group :test, :development do
   gem 'database_cleaner'
   gem 'cucumber-api-steps', :require => false
   gem 'selenium-webdriver'
-  # gem 'gizmo', git: 'git@github.com:impurist/gizmo.git'
 end
-
-
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
-
-
-gem "devise"

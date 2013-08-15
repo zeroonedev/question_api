@@ -1,4 +1,4 @@
-class EpisodesController < CorsController
+class EpisodesController < ApplicationController
 
   before_filter :authenticate_user!
   before_filter :has_access
@@ -39,6 +39,4 @@ class EpisodesController < CorsController
       end
     end
   end
-
-
 end

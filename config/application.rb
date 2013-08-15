@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require './app/middleware/cors_headers.rb'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -14,6 +15,8 @@ module QuestionServer
   class Application < Rails::Application
 
     config.encoding = "utf-8"
+
+    config.autoload_paths += Dir["#{Rails.root}/lib/modules"]
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
@@ -33,8 +36,7 @@ module QuestionServer
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # For Cors plugin:
-    # config.middleware.use Rack::Cors do ...
+    config.middleware.insert_before Warden::Manager, CorsHeaders
 
   end
 end
