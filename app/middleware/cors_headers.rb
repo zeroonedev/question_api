@@ -6,8 +6,6 @@ class CorsHeaders
   end
   def call env
 
-    puts "IN CORS MIDDLEWARE >>>"
-
     extra_headers = {
       "Access-Control-Allow-Origin"      => "http://localhost:8000",
       "Access-Control-Allow-Methods"     => "GET,POST,PUT,DELETE",
@@ -18,10 +16,6 @@ class CorsHeaders
     status, headers, body = @app.call(env)
     response = Rack::Response.new body, status, headers.merge(extra_headers)
 
-    result = response.finish
-
-    puts "<<< IN CORS MIDDLEWARE"
-
-    result
+    response.finish
   end
 end

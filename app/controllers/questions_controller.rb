@@ -3,19 +3,11 @@
 class QuestionsController < ApplicationController
 
   before_filter :authenticate_user!
-  
   before_filter :get_question, only: [:show, :edit, :update]
 
-  
-  
   def index
-    begin
-      @questions = Question.search(params)
-      p @questions.map(&:id)
-      @total =  @questions.total
-    rescue Exception => e
-      @notification = e
-    end
+    @questions = Question.search(params)
+    @total =  @questions.total
   end
 
   def new

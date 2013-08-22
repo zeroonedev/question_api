@@ -2,7 +2,7 @@ development:
   adapter: mysql2
   database: question_api_development
   user: root
-  password:  
+  password:
 
 test: &test
   adapter: mysql2
