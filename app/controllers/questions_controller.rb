@@ -5,10 +5,6 @@ class QuestionsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_question, only: [:show, :edit, :update, :destroy]
 
-  def first
-    @question = Question.first
-  end
-
   def index
     @questions = Question.search(params)
     @total     = @questions.total
