@@ -11,6 +11,8 @@ QuestionServer::Application.routes.draw do
 
   root :to => "client#index"
 
+  match '/asdf' => 'questions#first'
+
   # Note: Middleware is setting the OPTIONS CORS response headers
   %w( users/sign_in
       users/sign_out

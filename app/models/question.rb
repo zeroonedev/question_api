@@ -89,8 +89,8 @@ class Question < ActiveRecord::Base
     indexes :verified,         type: 'boolean'
     indexes :used,             type: 'boolean'
     indexes :updated_at,       type: 'date'
-  end    
-       
+  end
+
   after_save do
     tire.update_index
   end
@@ -111,7 +111,7 @@ class Question < ActiveRecord::Base
       s.facet "writers" do
         terms :writer_id
       end
-      
+
       s.filter :term, category_id: params[:category_id] if params[:category_id].present?
       s.facet "category" do
         terms :category_id
