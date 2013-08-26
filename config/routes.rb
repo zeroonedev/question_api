@@ -11,7 +11,7 @@ QuestionServer::Application.routes.draw do
 
   root :to => "client#index"
 
-  match '/asdf' => 'questions#first'
+  # match '/episodes/:id/add_default_rounds' => 'episodes#add_default_rounds'
 
   # Note: Middleware is setting the OPTIONS CORS response headers
   %w( users/sign_in
