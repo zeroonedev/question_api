@@ -2,8 +2,9 @@ Tire.configure { logger 'elasticsearch.log', :level => 'debug' }
 
 class QuestionsController < ApplicationController
 
-  before_filter :authenticate_user!
-  before_filter :get_question, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :verify_authenticity_token
+  before_filter      :authenticate_user! # TODO: This should be set by cookies
+  before_filter      :get_question, only: [:show, :edit, :update, :destroy]
 
   def index
     @questions = Question.search(params)
@@ -16,6 +17,9 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.create(params[:question])
+    require 'pp'
+    pp ['question', @question]
+
     if @question.valid?
       render :show
       @notification = "Question '#{@question.question}' created successfully."

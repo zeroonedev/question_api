@@ -10,5 +10,4 @@ class QuestionType < ActiveRecord::Base
   def self.multi
     find_by_name("Multi Choice")
   end
-
 end

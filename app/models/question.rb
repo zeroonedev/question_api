@@ -100,6 +100,7 @@ class Question < ActiveRecord::Base
   end
 
   def self.search(params)
+
     tire.search(load: true, default_opertor: "AND", match_all: {}) do |s|
       s.size params[:size].present? ? params[:size] : self.all.count
       s.from params[:from] if params[:from].present?
@@ -142,15 +143,13 @@ class Question < ActiveRecord::Base
         terms :question_type_id
       end
     end
-
   end
 
   def self.batch_tags
     verified.map{|q| { name: q.batch_tag, id: q.batch_tag } }.uniq
   end
 
-
-  #TODO make this less crazy
+  # TODO: make this less crazy
   def sanitize_errors
     errors.messages.map{|k, v| {k => v.join(" ")}  }.reduce({}){|memo, error| memo.merge!(error) }
   end
