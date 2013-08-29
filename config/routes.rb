@@ -3,7 +3,9 @@ QuestionServer::Application.routes.draw do
   devise_for :admins
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
-  devise_for :users, :controllers => { sessions: 'sessions' }
+  devise_for :users, :controllers => { sessions: 'sessions' } do
+    match '/users/info' => 'sessions#info'
+  end
 
   resources :questions
   resources :episodes
@@ -11,11 +13,10 @@ QuestionServer::Application.routes.draw do
 
   root :to => "client#index"
 
-  # match '/episodes/:id/add_default_rounds' => 'episodes#add_default_rounds'
-
   # Note: Middleware is setting the OPTIONS CORS response headers
   %w( users/sign_in
       users/sign_out
+      users/info
       questions.json
       questions/:id.json
       episodes.json

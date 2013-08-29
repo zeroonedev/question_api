@@ -19,7 +19,7 @@ class SessionsController < Devise::SessionsController
   end
 
   def failure
-    return render :json => {:success => false, :errors => ["Login failed."]}
+    render :json => {:success => false, :errors => ["Login failed."]}
   end
 
   def destroy
@@ -34,5 +34,10 @@ class SessionsController < Devise::SessionsController
 
   def options
     head(:ok)
+  end
+
+  def info
+    cu = current_user
+    render json: cu ? { success: true, user: cu.to_dto } : { success: false }
   end
 end
