@@ -25,6 +25,7 @@ class EpisodesController < ApplicationController
     get_episode
     @message = { message: "Episode:#{@episode.rx_number} deleted successfully." }
     @episode.destroy
+    sleep 1
     render json: @message
   end
 
