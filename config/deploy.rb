@@ -28,7 +28,7 @@ namespace :deploy do
   end
 
   task :start do
-    run "#{sudo} bundle exec puma -e production -d -b unix:///var/run/question_api.sock --pidfile /var/run/puma.pid"
+    run "cd /home/deploy/question_api/current && #{sudo} $HOME/.rbenv/shims/bundle exec puma -e production -d -b unix:///var/run/question_api.sock --pidfile /var/run/puma.pid"
   end
 
   task :stop do
