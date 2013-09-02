@@ -61,4 +61,15 @@ class Episode < ActiveRecord::Base
     hash
   end
 
+  def to_csv options = {}
+    cns = Question.column_names
+    CSV.generate(options) do |csv|
+      csv << cns
+      self.rounds.each do |round|
+        round.questions.each do |question|
+          csv << question.attributes.values_at(*cns)
+        end
+      end
+    end
+  end
 end

@@ -2,6 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 require './app/middleware/cors_headers.rb'
+require 'csv'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line

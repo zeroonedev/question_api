@@ -60,4 +60,13 @@ class EpisodesController < ApplicationController
       end
       render json: result
   end
+
+  def export_csv
+    episode_id = params['id']
+
+    response.headers["Content-Disposition"] = %{attachment; filename="episode-#{episode_id}.csv"}
+    response.headers["Content-Type"]        = 'text/csv'
+
+    send_data Episode.find(episode_id).to_csv, type: "text/plain", filename: "episode-#{episode_id}", disposition: 'attachment'
+  end
 end

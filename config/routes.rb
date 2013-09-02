@@ -7,13 +7,12 @@ QuestionServer::Application.routes.draw do
     match '/users/info' => 'sessions#info'
   end
 
-  resources :questions
-
   match '/episodes/replace_question' => 'episodes#replace_question'
+  match '/episodes/:id/export_csv'   => 'episodes#export_csv'
 
   resources :episodes
-
   resources :form_metadatum
+  resources :questions
 
   root :to => "client#index"
 
@@ -23,6 +22,7 @@ QuestionServer::Application.routes.draw do
       users/info
       questions.json
       questions/:id.json
+      episodes/:id/export_csv
       episodes.json
       episodes/:id.json
       episodes/replace_question
