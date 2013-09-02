@@ -1,3 +1,5 @@
+require "continuation"
+
 class EpisodesController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
@@ -40,5 +42,22 @@ class EpisodesController < ApplicationController
         format.json { render json: "Forbidden", status: 403 }
       end
     end
+  end
+
+  def replace_question
+      result = callcc do |cont|
+          old_question       = Question.find( params['question_id'] )
+          round              = old_question.round
+          qids               = round.question_ids
+          found              = Question.search_available params
+          offset             = rand(found.count)
+          new_question       = found.offset(offset).first
+          cont.call success: false, error: "No replacement question found" unless new_question
+          round.question_ids = qids.map {|i| i == old_question.id ? new_question.id : i }
+          round.save!
+
+          { success: true, question: new_question }
+      end
+      render json: result
   end
 end

@@ -3,12 +3,12 @@ class QuestionTypeValidator < ActiveModel::Validator
 
   def validate(record)
     if record.is_multi
-      record.errors.add :answer_a, "can't be blank" if record.answer_a.blank? 
-      record.errors.add :answer_b, "can't be blank" if record.answer_b.blank? 
-      record.errors.add :answer_c, "can't be blank" if record.answer_c.blank? 
-      record.errors.add :correct_answer, "can't be blank" if record.correct_answer.blank? 
+      record.errors.add :answer_a, "can't be blank" if record.answer_a.blank?
+      record.errors.add :answer_b, "can't be blank" if record.answer_b.blank?
+      record.errors.add :answer_c, "can't be blank" if record.answer_c.blank?
+      record.errors.add :correct_answer, "can't be blank" if record.correct_answer.blank?
     else
-      record.errors.add :answer,  "can't be blank" if record.answer.blank? 
+      record.errors.add :answer,  "can't be blank" if record.answer.blank?
     end
   end
 
@@ -16,26 +16,26 @@ end
 
 class Question < ActiveRecord::Base
 
-  attr_accessible :batch_tag, 
+  attr_accessible :batch_tag,
                   :answer,
-                  :category_id, 
+                  :category_id,
                   :difficulty_id,
-                  :extra_info, 
-                  :id, 
-                  :producer_id, 
-                  :question, 
-                  :tx_number, 
-                  :used, 
-                  :verified, 
+                  :extra_info,
+                  :id,
+                  :producer_id,
+                  :question,
+                  :tx_number,
+                  :used,
+                  :verified,
                   :verifier_reference_1,
-                  :verifier_reference_2, 
-                  :writer_id, 
-                  :writer_reference_1, 
-                  :writer_reference_2, 
+                  :verifier_reference_2,
+                  :writer_id,
+                  :writer_reference_1,
+                  :writer_reference_2,
                   :created_at,
                   :updated_at,
-                  :answer_a, 
-                  :answer_b, 
+                  :answer_a,
+                  :answer_b,
                   :answer_c,
                   :correct_answer,
                   :question_type_id,
@@ -60,13 +60,14 @@ class Question < ActiveRecord::Base
 
 
   validates_with QuestionTypeValidator
-  
+
   belongs_to :writer
   belongs_to :producer
   belongs_to :category
   belongs_to :difficulty
   belongs_to :question_type
-
+  belongs_to :episode
+  belongs_to :round
 
   scope :verified, -> { where(verified: true) }
 
@@ -75,11 +76,11 @@ class Question < ActiveRecord::Base
 
   mapping do
     indexes :id,               type: 'integer', index: 'not_analyzed'
-    indexes :question         
-    indexes :answer          
-    indexes :answer_a         
-    indexes :answer_b         
-    indexes :answer_c 
+    indexes :question
+    indexes :answer
+    indexes :answer_a
+    indexes :answer_b
+    indexes :answer_c
     indexes :batch_tag,        type: 'string', index: 'not_analyzed'
     indexes :writer_id,        type: 'integer'
     indexes :category_id,      type: 'integer'
@@ -162,4 +163,16 @@ class Question < ActiveRecord::Base
     question_type == QuestionType.multi
   end
 
+  def self.available
+      where("used is null or used is not true")
+  end
+
+  def self.search_available params
+      cid = params['category_id']
+      did = params['difficulty_id']
+      result = available
+      result = where category_id:   cid unless "#{cid}".empty?
+      result = where difficulty_id: did unless "#{did}".empty?
+      result
+  end
 end

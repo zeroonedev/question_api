@@ -8,7 +8,11 @@ QuestionServer::Application.routes.draw do
   end
 
   resources :questions
+
+  match '/episodes/replace_question' => 'episodes#replace_question'
+
   resources :episodes
+
   resources :form_metadatum
 
   root :to => "client#index"
@@ -20,7 +24,10 @@ QuestionServer::Application.routes.draw do
       questions.json
       questions/:id.json
       episodes.json
-      episodes/:id.json ).each do |path|
+      episodes/:id.json
+      episodes/replace_question
+      episodes/replace_question.json
+      ).each do |path|
     match path => 'cors#options', constraints: { method: 'OPTIONS' }
   end
 end

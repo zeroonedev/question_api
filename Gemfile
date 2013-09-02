@@ -20,6 +20,7 @@ gem 'dumper'
 gem 'capistrano-grunt', git: 'https://github.com/roots/capistrano-grunt.git'
 gem 'capistrano-npm', git: 'https://github.com/roots/capistrano-npm.git'
 gem "devise"
+gem 'acts_as_list'
 
 group :test, :development do
   gem 'rspec-rails'
