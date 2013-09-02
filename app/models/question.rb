@@ -168,11 +168,13 @@ class Question < ActiveRecord::Base
   end
 
   def self.search_available params
-      cid = params['category_id']
-      did = params['difficulty_id']
+      cid    = params['category_id']
+      did    = params['difficulty_id']
+      pid    = params['proposed_id']
       result = available
-      result = where category_id:   cid unless "#{cid}".empty?
-      result = where difficulty_id: did unless "#{did}".empty?
+      result = result.where("id = ?", pid)     unless pid.blank?
+      result = result.where category_id:   cid unless cid.blank?
+      result = result.where difficulty_id: did unless did.blank?
       result
   end
 end
