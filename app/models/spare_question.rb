@@ -1,4 +1,4 @@
-class SpareQuestion < Question 
+class SpareQuestion < Question
 
   before_create :set_assoiation_id
 

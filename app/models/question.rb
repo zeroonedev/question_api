@@ -69,6 +69,8 @@ class Question < ActiveRecord::Base
   belongs_to :episode
   belongs_to :round
 
+  acts_as_list :scope => :round
+
   scope :verified, -> { where(verified: true) }
 
   include Tire::Model::Search

@@ -5,8 +5,8 @@ class Round < ActiveRecord::Base
 
   belongs_to :episode
 
-  has_many :questions, :class_name => Question, conditions: proc { "spare_id is NULL" }
-  has_many :spares,    :class_name => SpareQuestion, foreign_key: :spare_id, conditions: proc { "spare_id is not NULL" }
+  has_many :questions, :class_name => Question, conditions: proc { "spare_id is NULL" }, order: "position"
+  has_many :spares,    :class_name => SpareQuestion, foreign_key: :spare_id, conditions: proc { "spare_id is not NULL" }, order: "position"
 
   def populate question_provider
     raise "ProvderError: Cannot perform populate without QuestionProvider" if question_provider.nil? 
