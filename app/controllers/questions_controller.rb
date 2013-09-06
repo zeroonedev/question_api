@@ -48,6 +48,10 @@ class QuestionsController < ApplicationController
     render json: { notice: "Question: @question.question, deleted successfully." }
   end
 
+  def number_available
+    render json: { available: Question.available.count }
+  end
+
   private
 
   def get_question

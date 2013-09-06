@@ -12,6 +12,8 @@ QuestionServer::Application.routes.draw do
 
   resources :episodes
   resources :form_metadatum
+
+  match '/questions/number_available' => 'questions#number_available'
   resources :questions
 
   root :to => "client#index"
@@ -22,6 +24,7 @@ QuestionServer::Application.routes.draw do
       users/info
       questions.json
       questions/:id.json
+      questions/number_available
       episodes/:id/export_csv
       episodes.json
       episodes/:id.json
