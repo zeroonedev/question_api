@@ -36,8 +36,12 @@ namespace :deploy do
   end
 
   task :restart do
-    sudo "#{sudo} kill -s SIGUSR2 $(cat /var/run/puma.pid)"
+    # sudo "#{sudo} kill -s SIGUSR2 $(cat /var/run/puma.pid)"
+    # Using explicit stop/start to avoid symlink issue - TODO: Find a better way
+    stop
+    start
   end
+
   task :uname do
     run "uname -a"
   end
