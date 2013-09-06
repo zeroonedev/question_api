@@ -8,15 +8,16 @@ child :rounds, object_root: false do
   attributes :name
   child :questions, object_root: false do
     attributes :id,
-               :question, 
-               :answer, 
-               :answer_a, 
+               :question,
+               :answer,
+               :answer_a,
                :answer_b,
                :answer_c,
                :correct_answer,
                :category_id,
                :difficulty_id,
-               :is_multi
+               :is_multi,
+               :used
 
     child :category, object_root: false do
       attribute  :id => :category_id
@@ -26,15 +27,16 @@ child :rounds, object_root: false do
 
   child :spares, object_root: false do
     attributes :id,
-               :question, 
-               :answer, 
-               :answer_a, 
+               :question,
+               :answer,
+               :answer_a,
                :answer_b,
                :answer_c,
                :correct_answer,
                :category_id,
                :difficulty_id,
-               :is_multi
+               :is_multi,
+               :used
   end
 
 end
