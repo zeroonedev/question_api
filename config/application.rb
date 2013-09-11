@@ -38,5 +38,7 @@ module QuestionServer
     config.assets.version = '1.0'
 
     config.middleware.insert_before ActionDispatch::ShowExceptions, CorsHeaders
+
+    config.middleware.delete "ActiveRecord::QueryCache"
   end
 end

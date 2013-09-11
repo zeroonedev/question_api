@@ -166,7 +166,9 @@ class Question < ActiveRecord::Base
   end
 
   def self.available
-      where("used is null or used is not true")
+    self.where("used IS NULL OR used IS NOT true")
+        .where("round_id IS NULL")
+        .where("spare_id IS NULL")
   end
 
   def self.search_available params

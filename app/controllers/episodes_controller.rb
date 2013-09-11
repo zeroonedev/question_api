@@ -49,16 +49,18 @@ class EpisodesController < ApplicationController
           old_question       = Question.find( params['question_id'] )
           cont.call( json: { success: false, error: "Question not found" }) unless old_question
           old_position       = old_question.position
-          round              = old_question.round
-          cont.call( json: { success: false, error: "No round found" }) unless round
           found              = Question.search_available params
           offset             = rand(found.count)
           new_question       = found.offset(offset).first
           cont.call( json: { success: false, error: "No replacement question found" }) unless new_question
-          round.questions << new_question
-          round.questions.delete old_question
-          round.save!
-          new_question.insert_at (old_position || 0)
+          new_question.round_id = old_question.round_id
+          new_question.spare_id = old_question.spare_id
+          new_question.position = old_question.position
+          new_question.save!
+          old_question.round_id = nil
+          old_question.spare_id = nil
+          old_question.position = nil
+          old_question.save!
 
           { json: { success: true, question: new_question }}
       end
