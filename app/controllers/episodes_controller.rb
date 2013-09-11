@@ -56,11 +56,11 @@ class EpisodesController < ApplicationController
           new_question.round_id = old_question.round_id
           new_question.spare_id = old_question.spare_id
           new_question.position = old_question.position
-          new_question.save!
+          new_question.save! validate: false
           old_question.round_id = nil
           old_question.spare_id = nil
           old_question.position = nil
-          old_question.save!
+          old_question.save! validate: false
 
           { json: { success: true, question: new_question }}
       end
