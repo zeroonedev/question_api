@@ -27,7 +27,7 @@ class EpisodesController < ApplicationController
     get_episode
     @message = { message: "Episode:#{@episode.rx_number} deleted successfully." }
     @episode.destroy
-    sleep 1
+    sleep 1 # TODO: Figure out a way to avoid having to do this...
     render json: @message
   end
 
@@ -46,17 +46,21 @@ class EpisodesController < ApplicationController
 
   def replace_question
       result = callcc do |cont|
-          old_question       = Question.find( params['question_id'] )
+          old_question  = Question.find( params['question_id'] )
           cont.call( json: { success: false, error: "Question not found" }) unless old_question
-          old_position       = old_question.position
-          found              = Question.search_available params
-          offset             = rand(found.count)
-          new_question       = found.offset(offset).first
+
+          round          = old_question.round
+          cont.call( json: { success: false, error: "Round not found" }) unless round
+
+          new_question = QuestionProvider.new.questions_for({limit: 1, type: round.type.question_type.name, spare: old_question.spare_id}).first
           cont.call( json: { success: false, error: "No replacement question found" }) unless new_question
+
+          old_position          = old_question.position
           new_question.round_id = old_question.round_id
           new_question.spare_id = old_question.spare_id
           new_question.position = old_question.position
           new_question.save! validate: false
+
           old_question.round_id = nil
           old_question.spare_id = nil
           old_question.position = nil
