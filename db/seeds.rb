@@ -20,7 +20,7 @@ end
 
 def writer_map key
   {
-    "DP" => "David Poltorak", 
+    "DP" => "David Poltorak",
     "GR" => "Graeme Rickerby",
     "MSK" => "Maureen Sherlock",
     "MSS" => "Michelle Seers",
@@ -29,15 +29,15 @@ def writer_map key
   }[key]
 end
 
-# Guy Le Couteur  GLC - 
-# Michelle Seers  MSS - 
-# Maureen Sherlock MSK - 
-# Matthew  Parkinson MP 
+# Guy Le Couteur  GLC -
+# Michelle Seers  MSS -
+# Maureen Sherlock MSK -
+# Matthew  Parkinson MP
 # Graeme Rickerby GR
 
 def producer_map key
   {
-    "DP" => "David Poltorak", 
+    "DP" => "David Poltorak",
     "GR" => "Graeme Rickerby",
     "MSK" => "Maureen Sherlock",
     "GLC" => "Guy Le Couteur",
@@ -71,18 +71,18 @@ end
 
 
 def import_questions
-  
+
   Question.delete_all
   single_choice_schema = Conformist.new do
     column :question
     column :answer
     column :extra_info
-    column :writer_reference_1 
-    column :writer_reference_2 
+    column :writer_reference_1
+    column :writer_reference_2
     column :verifier_reference_1
     column :verifier_reference_2
-    column :writer 
-    column :batch_tag 
+    column :writer
+    column :batch_tag
     column :difficulty
     column :category
     column :verified
@@ -97,12 +97,12 @@ def import_questions
     column :answer_c
     column :correct_answer
     column :extra_info
-    column :writer_reference_1 
-    column :writer_reference_2 
+    column :writer_reference_1
+    column :writer_reference_2
     column :verifier_reference_1
     column :verifier_reference_2
-    column :writer 
-    column :batch_tag 
+    column :writer
+    column :batch_tag
     column :difficulty
     column :category
     column :verified
@@ -116,7 +116,7 @@ def import_questions
       schema: single_choice_schema,
       is_multi: false
     },
-    multi_choice_csv: { 
+    multi_choice_csv: {
       file: CSV.open("db/test_question_data/real-data/MC_questions_final.csv"),
       schema: multi_choice_schema,
       is_multi: true
@@ -124,7 +124,7 @@ def import_questions
   }
 
   csv_importer.each do |key, value|
-      
+
       schema = value[:schema]
       file = value[:file]
       is_multi = value[:is_multi]
@@ -145,14 +145,14 @@ def import_questions
         producer = Producer.find_or_create_by_name(producer_name)
 
         category = Category.find_or_create_by_name(category_name)
-        
+
         difficulty_name = difficulty_map(difficulty_name)
         difficulty = Difficulty.find_or_create_by_name(difficulty_name)
 
         question = Question.new(q.attributes)
 
         question.verified = yes_no_map(q.verified)
-        
+
         question.question_type = question_type
         question.writer = writer
         question.producer = producer
@@ -224,18 +224,18 @@ def meta_data
 
   RoundType.delete_all
   [
-    { name: "Standard", 
+    { name: "Standard",
       number_of_questions: 10,
       number_of_spares: 3,
       question_type_id: QuestionType.single.id
-    }, 
-    { name: "Double", 
+    },
+    { name: "Double",
       number_of_questions: 20,
       number_of_spares: 3,
-      question_type_id: QuestionType.single.id  
-    },  
-    { name: "End", 
-      number_of_questions: 6,
+      question_type_id: QuestionType.single.id
+    },
+    { name: "End",
+      number_of_questions: 5,
       number_of_spares: 3,
       question_type_id: QuestionType.multi.id
     }

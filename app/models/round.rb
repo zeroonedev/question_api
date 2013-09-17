@@ -17,12 +17,14 @@ class Round < ActiveRecord::Base
 
   def question_populate question_provider
     question_provider.questions_for({limit: type.number_of_questions, type: type.question_type.name}).each do |q|
+     q.used = true
      questions << q
     end
   end
 
   def spare_populate question_provider
     question_provider.questions_for({limit: type.number_of_spares, type: type.question_type.name, spare: true}).each do |s|
+      s.used = true
       spares << s
     end
   end
