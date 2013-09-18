@@ -165,6 +165,11 @@ class Question < ActiveRecord::Base
     question_type == QuestionType.multi
   end
 
+  def remove_from_round!
+    self.round_id = nil
+    self.save!
+  end
+
   def self.available
     self.where("used IS NULL OR used IS NOT true")
         .where("round_id IS NULL")
