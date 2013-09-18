@@ -167,6 +167,7 @@ class Question < ActiveRecord::Base
 
   def remove_from_round!
     self.round_id = nil
+    self.used = nil
     self.save!
   end
 
