@@ -17,6 +17,7 @@ class QuestionProvider
     questions = question_class.available
                               .where(question_type_id: question_type(params[:type]))
                               .where("id NOT IN (?)", allocated_question_ids)
+                              .random_order
                               .limit(limit)
     raise "hell: #{limit} != #{questions.count}" if limit != questions.count
     allocate(questions)

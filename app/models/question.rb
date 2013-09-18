@@ -181,4 +181,8 @@ class Question < ActiveRecord::Base
       result = result.where difficulty_id: did unless did.blank?
       result
   end
+
+  def self.random_order
+    self.order("rand()")
+  end
 end
