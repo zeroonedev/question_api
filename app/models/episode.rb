@@ -5,7 +5,7 @@ class Episode < ActiveRecord::Base
   validates_presence_of :rx_number,
                         :record_date
 
-  has_many :rounds
+  has_many :rounds, :dependent => :destroy
 
   ROUND_METADATA = [
     {

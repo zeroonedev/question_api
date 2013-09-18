@@ -8,6 +8,8 @@ class Round < ActiveRecord::Base
   has_many :questions, :class_name => Question, conditions: proc { "spare_id is NULL" }, order: "position"
   has_many :spares,    :class_name => SpareQuestion, foreign_key: :spare_id, conditions: proc { "spare_id is not NULL" }, order: "position"
 
+  before_destroy :remove_relationship_to_questions_and_spares
+
   def populate question_provider
     raise "ProvderError: Cannot perform populate without QuestionProvider" if question_provider.nil? 
     question_populate(question_provider)
@@ -28,4 +30,10 @@ class Round < ActiveRecord::Base
       spares << s
     end
   end
+
+private
+  def remove_relationship_to_questions_and_spares
+    Question.update_all "round_id = null", "round_id = #{self.id}"
+  end
+
 end
