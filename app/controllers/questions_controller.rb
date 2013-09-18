@@ -45,7 +45,7 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     sleep 1 # TODO - Why isn't the elastic search index updating correctly without a sleep?
-    render json: { notice: "Question: @question.question, deleted successfully." }
+    render json: { notice: "Question: #{@question.question}, deleted successfully." }
   end
 
   def number_available
