@@ -15,7 +15,7 @@ QuestionServer::Application.routes.draw do
 
   match '/questions/number_available' => 'questions#number_available'
   resources :questions do
-    put 'remove_from_round' on: :member
+    put 'remove_from_round', on: :member
   end
 
   root :to => "client#index"

@@ -33,7 +33,7 @@ class Round < ActiveRecord::Base
 
 private
   def remove_relationship_to_questions_and_spares
-    Question.update_all "round_id = null", "round_id = #{self.id}"
+    Question.update_all "used = null, round_id = null", "round_id = #{self.id}"
   end
 
 end

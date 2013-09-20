@@ -32,6 +32,9 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    if params[:used] == false
+      @question.round = nil
+    end
     if @question.update_attributes(params[:question])
       render :show
     else
