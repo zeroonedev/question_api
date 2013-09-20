@@ -59,6 +59,7 @@ class EpisodesController < ApplicationController
           new_question.round_id = old_question.round_id
           new_question.spare_id = old_question.spare_id
           new_question.position = old_question.position
+          new_question.used     = true
           new_question.save! validate: false
 
           old_question.round_id = nil
