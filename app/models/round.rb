@@ -24,6 +24,7 @@ class Round < ActiveRecord::Base
      q.update_attributes! round_id: self.id, spare_id: nil
      #questions << q
     end
+    raise "something fucked up here in questions" if self.questions.count != type.number_of_questions
   end
 
   def spare_populate question_provider
@@ -33,6 +34,7 @@ class Round < ActiveRecord::Base
       s.update_attributes! round_id: nil, spare_id: self.id
       #spares << s
     end
+    raise "something fucked up here in spares" if self.spares.count != type.number_of_spares
   end
 
 private
