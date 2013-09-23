@@ -189,6 +189,6 @@ class Question < ActiveRecord::Base
   end
 
   def self.random_order
-    self.order("rand()")
+    self.order("rand()").select("distinct questions.*")
   end
 end
