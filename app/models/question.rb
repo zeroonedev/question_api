@@ -52,7 +52,6 @@ class Question < ActiveRecord::Base
 
   validates_uniqueness_of :question
 
-  validates :question, length: { maximum: 82 }
   validates :answer,   length: { maximum: 33 }
   validates :answer_a, length: { maximum: 33 }
   validates :answer_b, length: { maximum: 33 }
