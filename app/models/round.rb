@@ -14,15 +14,14 @@ class Round < ActiveRecord::Base
     raise "ProvderError: Cannot perform populate without QuestionProvider" if question_provider.nil? 
     question_populate(question_provider)
     spare_populate(question_provider)
-    self.save
+    self.save!
   end
 
   def question_populate question_provider
     question_provider.questions_for({limit: type.number_of_questions, type: type.question_type.name}).each do |q|
      q.used = true
      raise "Question #{q.id} already associated with round" if q.round_id
-     q.update_attributes! round_id: self.id, spare_id: nil
-     #questions << q
+     questions << q
     end
     raise "something fucked up here in questions" if self.questions.count != type.number_of_questions
   end
@@ -31,8 +30,7 @@ class Round < ActiveRecord::Base
     question_provider.questions_for({limit: type.number_of_spares, type: type.question_type.name, spare: true}).each do |s|
       s.used = true
       raise "Question #{s.id} already associated with round" if s.round_id
-      s.update_attributes! round_id: nil, spare_id: self.id
-      #spares << s
+      spares << s
     end
     raise "something fucked up here in spares" if self.spares.count != type.number_of_spares
   end
