@@ -20,6 +20,7 @@ class Round < ActiveRecord::Base
   def question_populate question_provider
     question_provider.questions_for({limit: type.number_of_questions, type: type.question_type.name}).each do |q|
      q.used = true
+     raise "Question #{q.id} already associated with round" if q.round_id
      questions << q
     end
   end
@@ -27,6 +28,7 @@ class Round < ActiveRecord::Base
   def spare_populate question_provider
     question_provider.questions_for({limit: type.number_of_spares, type: type.question_type.name, spare: true}).each do |s|
       s.used = true
+      raise "Question #{s.id} already associated with round" if s.round_id
       spares << s
     end
   end
