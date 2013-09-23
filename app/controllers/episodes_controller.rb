@@ -11,6 +11,14 @@ class EpisodesController < ApplicationController
       @episode = Episode.generate( params[:episode])
       @provider = QuestionProvider.new
       @episode.populate(@provider)
+
+      @episode.rounds.each_with_index do |round, i|
+        rqc = round.questions.count
+        rtn = round.type.number_of_questions
+        if rqc != rtn
+          raise "Round #{i} [#{round.id}] of episode #{@episode.id} contains #{rqc} questions (Should have #{rtn})"
+        end
+      end
     end
     render :show
   end
