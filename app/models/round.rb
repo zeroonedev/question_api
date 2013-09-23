@@ -21,7 +21,8 @@ class Round < ActiveRecord::Base
     question_provider.questions_for({limit: type.number_of_questions, type: type.question_type.name}).each do |q|
      q.used = true
      raise "Question #{q.id} already associated with round" if q.round_id
-     questions << q
+     q.update_attributes! round_id: self.id, spare_id: nil
+     #questions << q
     end
   end
 
@@ -29,13 +30,14 @@ class Round < ActiveRecord::Base
     question_provider.questions_for({limit: type.number_of_spares, type: type.question_type.name, spare: true}).each do |s|
       s.used = true
       raise "Question #{s.id} already associated with round" if s.round_id
-      spares << s
+      s.update_attributes! round_id: nil, spare_id: self.id
+      #spares << s
     end
   end
 
 private
   def remove_relationship_to_questions_and_spares
-    Question.update_all "used = null, round_id = null", "round_id = #{self.id}"
+    Question.update_all "used = null, round_id = null, spare_id = null", "round_id = #{self.id}"
   end
 
 end
