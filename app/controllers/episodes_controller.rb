@@ -7,11 +7,11 @@ class EpisodesController < ApplicationController
   before_filter :has_access
 
   def create
-    @episode = Episode.generate(
-      params[:episode]
-    )
-    @provider = QuestionProvider.new
-    @episode.populate(@provider)
+    ActiveRecord::Base.transaction do
+      @episode = Episode.generate( params[:episode])
+      @provider = QuestionProvider.new
+      @episode.populate(@provider)
+    end
     render :show
   end
 
