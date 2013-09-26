@@ -60,7 +60,11 @@ class EpisodesController < ApplicationController
           round          = old_question.round
           cont.call( json: { success: false, error: "Round not found" }) unless round
 
-          new_question = QuestionProvider.new.questions_for({limit: 1, type: round.type.question_type.name, spare: old_question.spare_id}).first
+          new_question = QuestionProvider.new.questions_for({limit: 1, type: round.type.question_type.name, spare: old_question.spare_id})
+          new_question = new_question.where(difficulty_id: params[:difficulty_id]) if params[:difficulty_id]
+          new_question = new_question.where(category_id:   params[:category_id])   if params[:category_id]
+          new_question = new_question.first
+
           cont.call( json: { success: false, error: "No replacement question found" }) unless new_question
 
           old_position          = old_question.position
