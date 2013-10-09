@@ -35,6 +35,7 @@ class QuestionsController < ApplicationController
     if params[:used] == false
       @question.round = nil
     end
+    params[:question].delete("")
     if @question.update_attributes(params[:question])
       render :show
     else
